@@ -1,0 +1,705 @@
+$black-color: #050517;
+$orange-color: #CF5C36;
+$darkorange-color: #cf5c36;
+$yellow-color: #d09f25;
+$dirtyyellow-color: #988148;
+$brown-color: #efc88b;
+$lightbrown-color: #f4e3b2;
+$white-color: #fff;
+$lightblue-color: #d3d5d7;
+$darkblue-color: #3C6266;
+$color1: #f4f4f4;
+$color2: #3197EE;
+
+.active {
+  background: none;
+}
+
+main {
+  background-image: url("/static/images/background.png");
+  padding: 20px;
+}
+
+.nav-item-contracts {
+  background-color: $orange-color;
+}
+
+#contracts {
+  padding: 10px;
+  width: 90%;
+  margin: auto;
+}
+
+.table-top {
+  width: 100%;
+  margin: 0;
+}
+
+.contracts-top {
+  background: $black-color;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  color: white;
+  border-top: 2px solid $darkorange-color;
+
+  h5 {
+    flex-grow: 2;
+  }
+}
+
+.icon-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-actions i {
+  flex-grow: 1;
+  font-size: 20px;
+}
+
+.search-container {
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.tableSearch {
+  height: 100%;
+  border-right: none;
+  border-top: none;
+}
+
+.tableSearch:focus {
+  border: none;
+  border-bottom: 2px solid $orange-color;
+  box-shadow: none;
+}
+
+.fa-file-contract {
+  cursor: pointer;
+  font-size: 20px;
+}
+#search_anchor{
+    height: 100%;
+    align-items: center;
+    display: flex;
+    background: $black-color;
+}
+.fa-search {
+  color: $white-color;
+  font-size: 20px;
+}
+
+.print-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0;
+  margin-top: 5px;
+}
+
+.print-contracts-btn {
+  background-color: $black-color;
+  border: 2px solid $darkorange-color;
+  padding: 10px;
+  width: 60%;
+  color: $white-color;
+}
+
+.print-contracts-btn:hover {
+  background-color: $black-color;
+  color: $white-color;
+}
+
+.print-contracts-btn.btn-secondary:not(:disabled):not(.disabled):active {
+  background-color: $black-color;
+}
+
+.contracts-table thead, .select-owners-table thead, .plots-table thead,.owners-table thead,.payments-table thead,.plots-table-preview thead {
+  background: $darkorange-color;
+  color: $white-color;
+}
+
+tbody tr:nth-child(even) {
+  background: $brown-color;
+}
+
+tbody tr:nth-child(odd) {
+  background: $lightbrown-color;
+}
+td.icon-actions{
+  cursor: pointer;
+}
+
+ul.pagination a.page-link {
+  color: $black-color;
+}
+
+ul.pagination a.page-link:hover {
+  color: $brown-color;
+}
+
+ul.pagination a.page-link:focus {
+  box-shadow: none;
+}
+
+ul.pagination .page-item.active .page-link {
+  background-color: $black-color;
+  border-color: $black-color;
+}
+
+// Add contract form
+#addContractModal > div > div > div.modal-header {
+  background: $black-color;
+  color: $white-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#addContractModal > .modal-title {
+  text-align: center;
+}
+
+#addContractModal > div > div > div.modal-header > button {
+  color: $white-color;
+  opacity: 7;
+  padding: 0;
+  margin: 0;
+  align-self: flex-end;
+}
+
+#addContractModal .modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#addContractModal .modal-footer div.loader-container{
+    display:none;
+}
+#addContractModal .modal-footer div.loader {
+  height: 40px;
+  width: 40px;
+  animation: spin 0.8s infinite linear;
+  border: 8px solid #F19F4D;
+  border-right-color: transparent;
+  border-radius: 50%;
+  opacity: 0.8;
+  margin: auto;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); }}
+
+.fa-plus-circle {
+  font-size: 20px;
+}
+
+#add_contract_form {
+  text-align: center;
+  position: relative;
+}
+
+#add_contract_form fieldset {
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+}
+
+/*Hide all except first fieldset*/
+#add_contract_form fieldset:not(:first-of-type) {
+  display: none;
+}
+
+.input-container, .view-input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.input-container label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  background: $black-color;
+  color: white;
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+
+/*inputs*/
+
+#add_contract_form input, #add_contract_form textarea, #add_contract_form select, #add_contract_form select option {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: montserrat;
+  color: #2C3E50;
+  font-size: 17px;
+  resize: none;
+}
+
+
+#add_contract_form table.plots-table tr td input[type=checkbox] {
+  width: auto;
+}
+
+/* Styling Checkbox Starts */
+.checkbox-label {
+  display: block;
+  position: relative;
+  margin: auto;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 24px;
+  height: 24px;
+  width: 24px;
+  clear: both;
+}
+
+.checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-label .checkbox-custom {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  border-radius: 5px;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  border: 2px solid #FFFFFF;
+}
+
+
+.checkbox-label input:checked ~ .checkbox-custom {
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  -webkit-transform: rotate(0deg) scale(1);
+  -ms-transform: rotate(0deg) scale(1);
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+  border: 2px solid #FFFFFF;
+}
+
+
+.checkbox-label .checkbox-custom::after {
+  position: absolute;
+  content: "";
+  left: 12px;
+  top: 12px;
+  height: 0px;
+  width: 0px;
+  border-radius: 5px;
+  border: solid #009BFF;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(0deg) scale(0);
+  -ms-transform: rotate(0deg) scale(0);
+  transform: rotate(0deg) scale(0);
+  opacity: 1;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+
+
+.checkbox-label input:checked ~ .checkbox-custom::after {
+  -webkit-transform: rotate(45deg) scale(1);
+  -ms-transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1);
+  opacity: 1;
+  left: 6px;
+  top: 1px;
+  width: 6px;
+  height: 12px;
+  border: solid $darkorange-color;
+  border-width: 0 2px 2px 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+
+/* For Ripple Effect for checkbox */
+.checkbox-label .checkbox-custom::before {
+  position: absolute;
+  content: "";
+  left: 10px;
+  top: 10px;
+  width: 0px;
+  height: 0px;
+  border-radius: 5px;
+  border: 2px solid #FFFFFF;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+
+.checkbox-label input:checked ~ .checkbox-custom::before {
+  left: -3px;
+  top: -3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  -webkit-transform: scale(3);
+  -ms-transform: scale(3);
+  transform: scale(3);
+  opacity: 0;
+  z-index: 999;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+
+#add_contract_form input:focus, #add_contract_form textarea:focus, #add_contract_form select:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid $black-color;
+  outline-width: 0;
+  transition: All 0.5s ease-in;
+  -webkit-transition: All 0.5s ease-in;
+  -moz-transition: All 0.5s ease-in;
+  -o-transition: All 0.5s ease-in;
+}
+
+/*buttons*/
+#add_contract_form .action-button, #edit_contract_form .action-button, #addContractModal .modal-footer .action-button {
+  width: 100px;
+  background: $black-color;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+
+#add_contract_form .action-button:hover, #add_contract_form .action-button:focus, #edit_contract_form .action-button:hover, #edit_contract_form .action-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px $black-color;
+}
+
+#addContractModal .modal-footer .action-button {
+  background: $darkorange-color;
+  outline: none;
+}
+
+#addContractModal .modal-footer .action-button:hover, #addContractModal .modal-footer .action-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px $darkorange-color;
+  outline: none;
+}
+
+#add_contract_form .action-button-previous {
+  width: 100px;
+  background: #C5C5F1;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+
+#add_contract_form .action-button-previous:hover, #add_contract_form .action-button-previous:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
+}
+
+.alert-dismissible .close {
+  outline: none;
+}
+
+.add_contract_form-buttons {
+  width: 100%;
+}
+
+#add_contract_form input[type="submit"] {
+  width: 25%;
+}
+
+/*headings*/
+.fs-title {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #2C3E50;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.fs-subtitle {
+  font-weight: normal;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/*progressbar*/
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  /*CSS counters to number the steps*/
+  counter-reset: step;
+  padding: 0;
+}
+
+#progressbar li {
+  list-style-type: none;
+  color: $black-color;
+  text-transform: uppercase;
+  font-size: 9px;
+  width: 33.33%;
+  float: left;
+  position: relative;
+  letter-spacing: 1px;
+}
+
+#progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 24px;
+  height: 24px;
+  line-height: 26px;
+  display: block;
+  font-size: 12px;
+  color: #333;
+  background: white;
+  border-radius: 25px;
+  margin: 0 auto 10px auto;
+  text-align: center;
+}
+
+/*progressbar connectors*/
+#progressbar li:after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: white;
+  position: absolute;
+  left: -50%;
+  top: 9px;
+  z-index: -1; /*put it behind the numbers*/
+}
+
+#progressbar li:first-child:after {
+  /*connector not needed before the first step*/
+  content: none;
+}
+
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before, #progressbar li.active:after {
+  background: $darkorange-color;
+  color: white;
+}
+
+.select-owners-table tbody tr:hover {
+  cursor: pointer;
+}
+
+.select-owners-table tbody tr.active {
+  color: white;
+  background: $darkorange-color;
+}
+
+.icon {
+  background: #050517;
+  color: white;
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+//Add contract form step 3 (plots)
+
+#accordionExample div.card-header {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+// Contract Single Page CSS
+.pointer-shape {
+  width: 200px;
+  height: 40px;
+  position: relative;
+  background: $black-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $white-color;
+}
+
+.pointer-shape:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid white;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+
+.pointer-shape:before {
+  content: "";
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid $black-color;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+
+.contract-info {
+  padding: 30px;
+}
+
+.bordered-container {
+  background: $white-color;
+  border: 1px solid $black-color;
+  position: relative;
+}
+
+.bordered-container.jumbotron {
+  padding: 1em 1em;
+}
+
+.edit-input-container {
+  margin-bottom: 15px;
+}
+
+.edit-input-container .pointer-shape {
+  margin-right: 30px;
+}
+
+.edit-input-container input, textarea, select {
+  width: 70%;
+  resize: none;
+}
+
+.edit-input-container input:focus, textarea:focus, select:focus {
+  box-shadow: none;
+  border: 1px solid $black-color;
+}
+
+.edit-contract-section-title {
+  background: white;
+  position: absolute;
+  top: -15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#edit-icon-btn {
+  font-size: 20px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  width: 100%;
+  text-align: right;
+}
+
+.edit-contract-buttons-container {
+  display: flex;
+  justify-content: center;
+}
+
+#edit_contract_form #edit_contract_cancel_btn {
+  background: $darkorange-color;
+}
+
+#edit_contract_form #edit_contract_cancel_btn:focus, #edit-contract-btn:focus {
+  outline: none;
+}
+
+#edit_contract_form #edit_contract_cancel_btn:hover {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px $darkorange-color;
+}
+
+.plots-table .btn-info, .payments-table .btn-info, .owners-table .btn-info, {
+  background-color: $black-color;
+  border-color: $black-color;
+}
+
+.plots-table .btn-info:hover,.payments-table .btn-info:hover, .owners-table .btn-info:hover {
+  background-color: $darkorange-color;
+  border-color: $darkorange-color;
+}
+
+.table-responsive {
+  max-height: 250px;
+}
+
+div.file-container div.file-input {
+  margin-bottom: 15px;
+}
+
+#edit_contract_form input.file-caption-name {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  border: none;
+  background: 0 0;
+  outline: 0;
+}
+
+button.close.fileinput-remove:focus {
+  outline: none;
+}
+
+button.fileinput-upload-button {
+  display: none;
+}
+
+div.btn-primary.btn-file {
+  background-color: $black-color;
+  border-color: $black-color;
+}
+
+.btn-secondary.fileinput-remove.fileinput-remove-button {
+  background-color: $darkorange-color;
+  border-color: $darkorange-color;
+}
+
+@media (min-width: 576px) {
+  .jumbotron {
+    padding: 1em 1em;
+  }
+}

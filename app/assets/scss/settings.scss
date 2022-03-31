@@ -1,0 +1,293 @@
+$black-color: #050517;
+$orange-color: #CF5C36;
+$darkorange-color: #cf5c36;
+$yellow-color: #d09f25;
+$dirtyyellow-color: #988148;
+$brown-color: #efc88b;
+$lightbrown-color: #f4e3b2;
+$white-color: #fff;
+$lightblue-color: #d3d5d7;
+$darkblue-color: #3C6266;
+$color1: #f4f4f4;
+$coral: #3197EE;
+$settings-main-color: #fff8e2;
+$settings-secondary-color: #deac9c;
+
+.active {
+  background: none;
+}
+
+main {
+  background-image: url("/static/images/background.png");
+  padding: 20px;
+}
+
+#settings {
+  padding: 10px;
+  width: 90%;
+  margin: auto;
+}
+.aside-settings{
+    background: $settings-main-color;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.settings-menu{
+    display: flex;
+    flex-direction: column;
+}
+.settings-menu li {
+    padding: 30px;
+    width: 100%;
+    border-bottom: 1px solid #ffe9c0;
+}
+.settings-menu li.active{
+    border-right: 2px solid $darkorange-color;
+}
+
+.settings-menu li a{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: $settings-secondary-color;
+}
+.settings-menu li a:hover,.settings-menu li a:focus{
+    color: $darkorange-color;
+}
+.settings-menu li a i {
+    font-size: 25px;
+}
+
+.settings-content{
+    background: $settings-main-color;
+    margin-left: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.bordered-container {
+  background: $settings-main-color;
+  border: 1px solid $settings-secondary-color;
+  position: relative;
+  margin-top: 30px;
+}
+.rent-section-title {
+  background: $settings-main-color;
+  position: absolute;
+  top: -15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+input::placeholder{
+    font-size:15px;
+    font-weight:600;
+}
+//Select grain type
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.multiselect {
+    width: 100%;
+    font-size: 15px;
+    padding-bottom: 4px;
+    border-radius: 3px;
+    border: 1px solid $settings-secondary-color;
+    transition: 0.2s;
+    outline: none;
+    margin-top:20px;
+    background: white;
+}
+
+.multiselect:hover {
+    border: 1px solid $settings-secondary-color;
+}
+
+.multiselect.active {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom: 1px solid transparent;
+}
+
+.multiselect > .title {
+    cursor: pointer;
+    height: 16px;
+    padding: 6px;
+}
+
+.multiselect > .title > .text {
+    max-height: 25px;
+    display: block;
+    float: left;
+    overflow: hidden;
+    line-height: 1.3em;
+}
+
+.multiselect > .title > .expand-icon,
+.multiselect > .title > .close-icon {
+    float: right;
+    border-radius: 50%;
+    padding: 0 4px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+    transition: 0.2s;
+    width: 20px;
+    height: 20px;
+    display: none;
+}
+
+.multiselect.selection > .title > .expand-icon {
+    display: none;
+}
+
+.multiselect > .title > .expand-icon,
+.multiselect.selection > .title > .close-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.multiselect > .title > .close-icon:hover {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background: rgb(203, 32, 32);
+    color: #fff;
+}
+
+.multiselect > .container {
+    max-height: 200px;
+    overflow: auto;
+    margin-top: 4px;
+    width: 100%;
+    transition: 0.2s;
+    z-index: 99;
+    background: #fff;
+}
+
+.multiselect.active > .container {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: 0;
+}
+
+.multiselect:hover > .container {
+    border-top-color: rgba(0, 0, 0, 0.3);
+}
+
+.multiselect.active:hover > .container {
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+.multiselect > .container > option {
+    display: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+
+.multiselect > .container > option.selected {
+    background: $settings-secondary-color;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: #fff;
+}
+
+.multiselect > .container > option:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: #000;
+}
+
+.multiselect.active > .container > option {
+    display: block;
+}
+#user_settings_form label,#rent_settings_form label,#contract_settings_form label,#contract_settings_form span,#cash_payment_doc_settings_form label{
+    display:flex;
+    align-items:center;
+    margin-bottom: 0;
+}
+#contract_settings_form input,#user_settings_form input,#user_settings_form select,#cash_payment_doc_settings_form input{
+    padding: 5px;
+    border: 1px solid $settings-secondary-color;
+    border-radius: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 17px;
+}
+#rent_settings_form input{
+    border: 1px solid $settings-secondary-color;
+}
+#contract_settings_form input:hover{
+    cursor:pointer;
+}
+#cash_payment_doc_settings_form input:focus,#contract_settings_form input:focus,#rent_settings_form input:focus,#user_settings_form input:focus,#user_settings_form select:focus{
+    box-shadow: none !important;
+    border: 1px solid $darkorange-color;
+    outline-width: 0;
+}
+.icon{
+    background: $settings-secondary-color;
+    color: white;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+.edit-user-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#user_settings_form .action-button,#rent_settings_form .action-button,#contract_settings_form .action-button ,#cash_payment_doc_settings_form .action-button{
+  width: 100px;
+  background: $black-color;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+
+#user_settings_form .action-button:hover, #user_settings_form .action-button:focus,
+#rent_settings_form .action-button:hover,#rent_settings_form .action-button:focus,
+#contract_settings_form .action-button:hover,#contract_settings_form .action-button:focus,
+#cash_payment_doc_settings_form .action-button:hover,#cash_payment_doc_settings_form .action-button:focus{
+  box-shadow: 0 0 0 2px white, 0 0 0 3px $black-color;
+}
+#cash_payment_doc_date{
+    cursor:pointer;
+}
+
+button.close:focus{
+    outline:none;
+}
+@media (min-width: 768px)
+{
+    .col-md-1 {
+        max-width: 5.333333% ;
+    }
+}
+@media (min-width: 576px) {
+  .jumbotron {
+    padding: 1em 1em;
+  }
+}

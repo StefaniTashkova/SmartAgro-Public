@@ -1,0 +1,125 @@
+<div class="contact-form-container">
+    <div class="jumbotron jumbotron-sm">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12">
+                    <h1 class="h1">
+                        Свържи се с нас <small>Очакваме вашите въпроси</small></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="well well-sm">
+                    <form action="" method="POST">
+                        {{ contact_form.csrf_token }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ contact_form.name.label }}
+                                    {{ contact_form.name(class='form-control',placeholder='Въведи име') }}
+                                    {% for error in contact_form.name.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ contact_form.email.label }}
+                                    <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope"></i>
+                                    </span>
+                                        {{ contact_form.email( class='form-control',placeholder='Въведи имейл' )}}
+                                    </div>
+                                    {% for error in contact_form.email.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ contact_form.subject.label }}
+                                    {{ contact_form.subject(class='form-control') }}
+                                    {% for error in contact_form.subject.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ contact_form.message.label }}
+                                    {{ contact_form.message( class="form-control" ,rows="9" ,cols="25" ,
+                                    placeholder='Съобщение' ) }}
+                                    {% for error in contact_form.message.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                {{ contact_form.submit_contact(class="btn btn-warning pull-right") }}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <legend><i class="fas fa-globe-europe"></i> Нашият офис</legend>
+                <address>
+                    <strong>Agrosmart ООД.</strong><br>
+                    ул. Панайот Хитов №69 eт.1<br>
+                    Варна,България<br>
+                    <i class="fas fa-phone"></i>
+                     0878256122
+                </address>
+                <address>
+                    <strong>Имейл</strong><br>
+                    <a href="mailto:#">agrosmart@gmail.com</a>
+                </address>
+            </div>
+        </div>
+    </div>
+    {% with messages = get_flashed_messages(category_filter=["contact_msg"]) %}
+    {% if messages %}
+    {% for message in messages %}
+    {% if message == 'Имейлът е изпратен успешно' %}
+    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% else %}
+    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+</div>

@@ -1,0 +1,387 @@
+.active {
+  background: none; }
+
+  main {
+    background-image: url("/static/images/background.png");
+    padding: 20px; }
+
+    .nav-item-payments {
+      background-color: #CF5C36; }
+
+      #payments {
+        padding: 10px;
+        width: 90%;
+        margin: auto; }
+
+        .table-top {
+          width: 100%;
+          margin: 0; }
+
+          .payments-top {
+            background: #050517;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            color: white;
+            border-top: 2px solid #cf5c36; }
+            .payments-top h5 {
+              flex-grow: 2; }
+
+.icon-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+  .icon-actions i, .icon-actions span {
+    flex-grow: 1;
+    font-size: 20px;
+    cursor: pointer; }
+
+    .search-container {
+      padding: 0;
+      display: flex;
+      align-items: center; }
+
+      .tableSearch {
+        height: 100%;
+        border-right: none;
+        border-top: none; }
+
+        .tableSearch:focus {
+          border: none;
+          border-bottom: 2px solid #CF5C36;
+          box-shadow: none; }
+
+          .fa-file-contract {
+            cursor: pointer;
+            font-size: 20px; }
+
+            #search_anchor {
+              height: 100%;
+              align-items: center;
+              display: flex;
+              background: #050517; }
+
+              .fa-search {
+                color: #fff;
+                font-size: 20px; }
+
+                .generate-btn-container {
+                  display: flex;
+                  padding: 0;
+                  margin-top: 5px; }
+
+                  .generate-payments-btn, .download-generated-payments-btn {
+                    background-color: #050517;
+                    border: 2px solid #cf5c36;
+                    padding: 10px;
+                    width: 60%;
+                    color: #fff; }
+
+                    .generate-payments-btn:hover, .download-generated-payments-btn:hover {
+                      background-color: #050517;
+                      color: #fff; }
+
+                      .payments-table thead {
+                        background: #cf5c36;
+                        color: #fff; }
+
+                        .payments-table tbody tr:nth-child(even) {
+                          background: #efc88b; }
+
+                          .payments-table tbody tr:nth-child(odd) {
+                            background: #f4e3b2; }
+
+                            ul.pagination a.page-link {
+                              color: #050517; }
+
+                              ul.pagination a.page-link:hover {
+                                color: #efc88b; }
+
+                                ul.pagination a.page-link:focus {
+                                  box-shadow: none; }
+
+                                  ul.pagination .page-item.active .page-link {
+                                    background-color: #050517;
+                                    border-color: #050517; }
+
+                                    #makePaymentModal > div.modal-dialog {
+                                      max-width: 1268px; }
+
+                                      #makePaymentModal > div > div > div.modal-header,
+                                      #generatePaymentsModal > div > div > div.modal-header {
+                                        background: #050517;
+                                        color: #fff;
+                                        display: flex;
+                                        flex-direction: column;
+                                        align-items: center; }
+
+                                        #makePaymentModal > .modal-title, #generatePaymentsModal > .modal-title {
+                                          text-align: center; }
+
+                                          #makePaymentModal > div > div > div.modal-header > button,
+                                          #generatePaymentsModal > div > div > div.modal-header > button {
+                                            color: #fff;
+                                            opacity: 7;
+                                            padding: 0;
+                                            margin: 0;
+                                            align-self: flex-end; }
+
+                                            #makePaymentModal .modal-footer, #generatePaymentsModal .modal-footer {
+                                              display: flex;
+                                              justify-content: center;
+                                              align-items: center; }
+
+                                              .bordered-container {
+                                                background: #fff;
+                                                border: 1px solid #050517;
+                                                position: relative; }
+
+                                                .bordered-ontainer.jumbotron {
+                                                  padding: 1em 1em; }
+
+                                                  .payment-modal-section-title {
+                                                    background: white;
+                                                    position: absolute;
+                                                    top: -15px;
+                                                    display: flex;
+                                                    justify-content: center;
+                                                    align-items: center; }
+
+                                                    .view-details {
+                                                      background: lightgray;
+                                                      height: 30px;
+                                                      display: flex;
+                                                      align-items: center;
+                                                      color: #050517;
+                                                      border-top: 2px solid #050517; }
+
+                                                      .table.contract-details thead, .table.contract-details tfoot {
+                                                        background-color: #050517;
+                                                        color: #fff; }
+
+                                                        .table-responsive {
+                                                          max-height: 250px; }
+
+                                                          .input-container {
+                                                            display: -ms-flexbox;
+                                                            display: flex;
+                                                            width: 100%;
+                                                            margin-bottom: 15px; }
+
+                                                            .input-container label {
+                                                              display: flex;
+                                                              align-items: center;
+                                                              justify-content: center; }
+
+                                                              #payment_form input, #payment_form textarea, #edit_payment_form textarea {
+                                                                padding: 15px;
+                                                                border: 1px solid #ccc;
+                                                                border-radius: 0px;
+                                                                width: 100%;
+                                                                box-sizing: border-box;
+                                                                font-family: montserrat;
+                                                                color: #2C3E50;
+                                                                font-size: 17px;
+                                                                resize: none; }
+
+                                                                #payment_form input#paid_amount_bgn {
+                                                                  border-top: 2px solid #050517; }
+
+                                                                  #payment_form div.payment-buttons-container {
+                                                                    display: flex !important; }
+
+                                                                    #payment_form input:focus, #payment_form textarea:focus,
+                                                                    #payment_form select:focus, #edit_payment_form textarea:focus {
+                                                                      -moz-box-shadow: none !important;
+                                                                      -webkit-box-shadow: none !important;
+                                                                      box-shadow: none !important;
+                                                                      border: 1px solid #050517;
+                                                                      outline-width: 0;
+                                                                      transition: All 0.5s ease-in;
+                                                                      -webkit-transition: All 0.5s ease-in;
+                                                                      -moz-transition: All 0.5s ease-in;
+                                                                      -o-transition: All 0.5s ease-in; }
+
+                                                                      #payment_form .action-button, #make_payment_cancel_btn,
+                                                                      #generate_payment_cancel_btn, #generate_payment_btn,
+                                                                      div.payment-buttons-container button.action-button {
+                                                                        width: 100px;
+                                                                        background: #050517;
+                                                                        font-weight: bold;
+                                                                        color: white;
+                                                                        border: 0 none;
+                                                                        border-radius: 25px;
+                                                                        cursor: pointer;
+                                                                        padding: 10px 5px;
+                                                                        margin: 10px 5px; }
+
+                                                                        #makePaymentModal .modal-footer .action-button,
+                                                                        #generatePaymentsModal .modal-footer #generate_payment_cancel_btn,
+                                                                        #edit_payment_cancel_btn {
+                                                                          background: #cf5c36;
+                                                                          outline: none; }
+
+                                                                          #payment_form .action-button:hover, #payment_form .action-button:focus,
+                                                                          div.payment-buttons-container button.action-button:hover,
+                                                                          div.payment-buttons-container button.action-button:focus,
+                                                                          #generate_payment_btn:hover, #generate_payment_btn:focus {
+                                                                            box-shadow: 0 0 0 2px white, 0 0 0 3px #050517;
+                                                                            outline: none; }
+
+                                                                            #makePaymentModal .modal-footer .action-button:hover,
+                                                                            #makePaymentModal .modal-footer .action-button:focus,
+                                                                            #generatePaymentsModal .modal-footer #generate_payment_cancel_btn:hover,
+                                                                            #generatePaymentsModal .modal-footer #generate_payment_cancel_btn:focus,
+                                                                            #edit_payment_cancel_btn:hover, #edit_payment_cancel_btn:focus {
+                                                                              box-shadow: 0 0 0 2px white, 0 0 0 3px #cf5c36;
+                                                                              outline: none; }
+
+                                                                              #generatePaymentsModal .modal-footer div.loader-container {
+                                                                                display: none; }
+
+                                                                                #generatePaymentsModal .modal-footer div.loader {
+                                                                                  height: 40px;
+                                                                                  width: 40px;
+                                                                                  animation: spin 0.8s infinite linear;
+                                                                                  border: 8px solid #F19F4D;
+                                                                                  border-right-color: transparent;
+                                                                                  border-radius: 50%;
+                                                                                  opacity: 0.8;
+                                                                                  margin: auto; }
+
+                                                                                  @-moz-keyframes spin {
+                                                                                    100% {
+                                                                                      -moz-transform: rotate(360deg);   }
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);   }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);   }
+}
+
+.payment-buttons-container {
+  display: flex;
+  justify-content: flex-end; }
+
+  #paid_amount_label {
+    color: #cf5c36;
+    font-weight: 600;
+    font-size: 17px; }
+
+    .transfer-double {
+      width: 100%;
+      height: 100%; }
+
+      .transfer-double-content-left, .transfer-double-content-right {
+        width: 40%; }
+
+        .transfer-double-content-middle {
+          margin: 0;
+          width: 20%; }
+
+          .transfer-double-content {
+            padding: 0; }
+
+            .transfer-double-content-middle {
+              display: flex;
+              flex-direction: column;
+              height: 320px;
+              justify-content: center;
+              align-items: center; }
+
+              .transfer-double-selected-list-search-input, .transfer-double-list-search-input {
+                width: 100%;
+                padding: 15px; }
+
+                .btn-arrow-active {
+                  background: #050517; }
+
+                  .checkbox-group .checkbox-normal:checked + label:before {
+                    background: #050517;
+                    border-color: #050517; }
+
+                    .btn-select-arrow {
+                      cursor: pointer; }
+
+                      section#payment {
+                        padding: 15px; }
+
+                        .payment-details-top {
+                          display: flex;
+                          justify-content: center;
+                          align-items: center; }
+
+                          .payment-details-top h3, .payment-section-titles {
+                            color: gray; }
+
+                            .fas.fa-cog {
+                              font-size: 20px;
+                              color: #cf5c36;
+                              text-align: right;
+                              cursor: pointer; }
+
+                              .payment-section {
+                                border-bottom: 1px solid lightgray;
+                                display: flex;
+                                flex-direction: column; }
+
+                                .transaction-div-preview {
+                                  border-left: 3px solid #cf5c36;
+                                  margin-top: 15px;
+                                  padding: 5px;
+                                  box-shadow: inset -3px 2px 4px 0px #b0a6b0; }
+
+                                  .transaction-div-preview span {
+                                    font-weight: 600; }
+
+                                    #paid_amount {
+                                      align-self: flex-end;
+                                      color: #cf5c36;
+                                      font-size: 17px;
+                                      font-weight: 700; }
+
+                                      .sender-div-preview {
+                                        border-bottom: 4px solid lightslategray; }
+
+                                        div.file-container div.file-input {
+                                          margin-bottom: 15px; }
+
+                                          #edit_contract_form input.file-caption-name {
+                                            width: 100%;
+                                            margin: 0;
+                                            padding: 0;
+                                            box-shadow: none;
+                                            border: none;
+                                            background: 0 0;
+                                            outline: 0; }
+
+                                            button.close.fileinput-remove:focus {
+                                              outline: none; }
+
+                                              button.fileinput-upload-button {
+                                                display: none; }
+
+                                                div.btn-primary.btn-file {
+                                                  background-color: #050517;
+                                                  border-color: #050517; }
+
+                                                  .btn-secondary.fileinput-remove.fileinput-remove-button {
+                                                    background-color: #cf5c36;
+                                                    border-color: #cf5c36; }
+
+                                                    div.payment-section textarea#notes {
+                                                      width: 100%;
+                                                      resize: none;
+                                                      margin-top: 15px; }
+
+                                                      @media (min-width: 576px) {
+                                                        .jumbotron {
+                                                          padding: 1em 1em;   }
+}

@@ -1,0 +1,310 @@
+<div class="modal fade" id="addOwnerModal" tabindex="-1" role="dialog" aria-labelledby="addOwnerModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div><i class="fas fa-plus-circle"></i></div>
+                <h4 class="modal-title" id="addOwnerModalLabel">Добавяне на собственик</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <!-- MultiStep Form -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="msform" action="{{url_for('add_owner')}}" method="post">
+                                {{ form.hidden_tag() }}
+                                <!-- progressbar -->
+                                <ul id="progressbar" class="row">
+                                    <li class="active col-md-3">Информация за собственик</li>
+                                    <li class="col-md-3">Документ за идентификация</li>
+                                    <li class="col-md-3">Допълнителна информация</li>
+                                    <li class="col-md-3">Преглед</li>
+                                </ul>
+                                <!-- fieldsets -->
+                                <fieldset>
+                                    <h2 class="fs-title">Информация за собственик</h2>
+
+                                    <div class="input-container">
+                                        <label for="custom-radio">Вид собственик</label>
+                                        {% for subfield in form.owner_type %}
+                                        <div class="custom-control custom-radio mx-3">
+                                            {{ subfield(class='custom-control-input') }} {{
+                                            subfield.label(class='custom-control-label') }}
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="company-details-container">
+                                        <div class="input-container">
+                                            <i class="fa fa-building icon"></i>
+                                            {{ form.company_name(placeholder="Име на компания") }}
+                                        </div>
+                                        {% for error in form.company_name.errors %}
+                                        <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                             role="alert">
+                                            <strong>{{ error }}</strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="input-container">
+                                            <i class="fa fa-building icon"></i>
+                                            {{ form.company_number(placeholder="Номер по БУЛСТАТ") }}
+                                        </div>
+                                        {% for error in form.company_number.errors %}
+                                        <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                             role="alert">
+                                            <strong>{{ error }}</strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="input-container">
+                                            <i class="fa fa-building icon"></i>
+                                            {{ form.vat_number(placeholder="Номер по ДДС") }}
+                                        </div>
+                                        {% for error in form.vat_number.errors %}
+                                        <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                             role="alert">
+                                            <strong>{{ error }}</strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="owner-details-container">
+                                        <div class="input-container">
+                                            <i class="fas fa-user-circle icon"></i>
+                                            {{ form.name(placeholder="Име Презиме Фамилия", required=False) }}
+                                        </div>
+                                        {% for error in form.name.errors %}
+                                        <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                             role="alert">
+                                            <strong>{{ error }}</strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="input-container">
+                                            <i class="fas fa-user-circle icon"></i>
+                                            {{ form.egn(placeholder="EГН", required=False) }}
+                                        </div>
+                                        {% for error in form.egn.errors %}
+                                        <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                             role="alert">
+                                            <strong>{{ error }}</strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        {% endfor %}
+                                        {% if user_exists is defined %}
+                                        <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                             role="alert">
+                                            <strong>User with this EGN already exists</strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <input type="hidden" name="" class="user-exists" value="{{user_exists}}">
+                                        {% endif %}
+                                        <div class="input-container">
+                                            <i class="fas fa-phone-square icon"></i>
+                                            {{ form.phone(placeholder="Телефон",required=False) }}
+                                        </div>
+                                        {% for error in form.phone.errors %}
+                                        <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                             role="alert">
+                                            <strong>{{ error }}</strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <input type="button" name="next" class="next action-button" value="Следващ"/>
+                                </fieldset>
+                                <fieldset>
+                                    <h2 class="fs-title">Документ за идентификация</h2>
+                                    <div class="input-container row">
+                                        <label for="nationalID_number" class="col-md-3 mb-0">Лична карта №</label>
+                                        {{ form.nationalID_number(class='col-md-9') }}
+                                    </div>
+                                    {% for error in form.nationalID_number.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container row">
+                                        <label for="nationalID_issue_date" class="col-md-3 mb-0">издадена на</label>
+                                        {{ form.nationalID_issue_date(class='col-md-9',placeholder='dd/mm/yy') }}
+                                    </div>
+                                    {% for error in form.nationalID_issue_date.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container row">
+                                        <label for="nationalID_issued_by" class="col-md-3 mb-0">от</label>
+                                        {{ form.nationalID_issued_by(class='col-md-9') }}
+                                    </div>
+                                    {% for error in form.nationalID_issued_by.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <input type="button" name="previous" class="previous action-button-previous"
+                                           value="Предишен"/>
+                                    <input type="button" name="next" class="next action-button" value="Следващ"/>
+                                </fieldset>
+                                <fieldset>
+                                    <h2 class="fs-title">Допълнителна информация</h2>
+                                    <div class="input-container">
+                                        <i class="fas fa-envelope icon"></i>
+                                        {{ form.email(placeholder="Имейл") }}
+                                    </div>
+                                    <div class="input-container">
+                                        <i class="fas fa-address-book icon"></i>
+                                        {{ form.address(placeholder="Адрес") }}
+                                    </div>
+                                    <div class="input-container">
+                                        <i class="fas fa-piggy-bank icon"></i>
+                                        {{ form.IBAN(placeholder="IBAN") }}
+                                    </div>
+                                    {% for error in form.IBAN.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        {{ form.BIC( class='form-control form-control-lg') }}
+                                    </div>
+                                    <div class="input-container">
+                                        {{ form.payment_location( class='form-control form-control-lg') }}
+                                    </div>
+                                    <div class="input-container">
+                                        {{ form.notes(placeholder='Бележки', cols="30" ,rows="10") }}
+                                    </div>
+
+
+                                    <input type="button" name="previous" class="previous action-button-previous"
+                                           value="Предишен"/>
+                                    <input type="button" name="next" class="next action-button" value="Следващ"/>
+                                </fieldset>
+                                <fieldset>
+                                    <h2 class="fs-title">Преглед</h2>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Лични данни</div>
+                                        <div class="panel-body">
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>Име на компания</span></div>
+                                                <input type="text" name="company_name_preview" value="">
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>Номер по БУЛСТАТ</span></div>
+                                                <input type="text" name="company_number_preview" value="">
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>Номер по ДДС</span></div>
+                                                <input type="text" name="vat_number_preview" value="">
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>Име</span></div>
+                                                <input type="text" name="name_preview" value="">
+
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>ЕГН</span></div>
+                                                <input type="text" name="egn_preview" value="">
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>Телефон</span></div>
+                                                <input type="text" name="phone_preview" value="">
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>Лична карта №</span></div>
+                                                <input type="text" name="nationalID_number_preview" value="">
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>издадена на</span></div>
+                                                <input type="text" name="nationalID_issue_date_preview" value="">
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>от</span></div>
+                                                <input type="text" name="nationalID_issued_by_preview" value="">
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>Имейл</span></div>
+                                                <input type="text" name="email_preview" value="">
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>Адрес</span></div>
+                                                <input type="text" name="address_preview" value="">
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>IBAN</span></div>
+                                                <input type="text" name="IBAN_preview" value="">
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>BIC</span></div>
+                                                <input type="text" name="BIC_preview" value="">
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>Място за получаване на рента</span>
+                                                </div>
+                                                <input type="text" name="payment_location_preview" value="">
+                                            </div>
+                                            <div class="view-input-container" style="display: flex;">
+                                                <div class="pointer-shape"><span>Бележки</span></div>
+                                                <textarea name="notes_preview" cols="30" rows="10"></textarea>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <input type="button" name="previous" class="previous action-button-previous"
+                                           value="Предишен"/>
+                                    <input type="submit" name="submit" class="submit action-button" id="add-owner-btn"
+                                           value="Потвърди и добави парцели"/>
+                                </fieldset>
+                                {% if preselected_owner_type is defined %}
+                                <input type="hidden" name="" class="preselected_owner_type"
+                                       value="{{ preselected_owner_type.name }}">
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.MultiStep Form -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="action-button" data-dismiss="modal">Откажи</button>
+            </div>
+        </div>
+    </div>
+</div>

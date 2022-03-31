@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block css%}
+
+<link href="{{ url_for('static', filename='css/home.css') }}" rel="stylesheet">
+
+{% endblock css%}
+
+
+{% block content %}
+
+<section class="banner row" id="home">
+    <div class="banner-welcome col-md-12">
+        <div class="banner-text">
+            <div class="banner-heading">
+                Добре дошли в АгроСмарт !
+            </div>
+            <div class="banner-sub-heading">
+                Помага в управлението на Вашето стопанство!
+            </div>
+        </div>
+    </div>
+    {% if not current_user.is_authenticated %}
+        {% include 'login.html' %}
+        <button type="button" class="btn btn-warning text-dark btn-banner m-auto" id="banner_btn"><span
+            class="banner-button-text">Вход</span></button>
+    {% endif %}
+
+</section>
+
+<section id="about" class="row">
+    <aside class="left-content col-md-6">
+        <div class="about-text">
+            <h2>Кои сме ние ?</h2>
+            <p>Земеделският софтуер AgroSmart е разработен от софтуерен екип от специалисти, за да подпомогне дейността
+                на земеделските производители с помощта на технологии за прецизно и дигитално земеделие.
+                Екипът непрестанно обновява портфолиото от софтуерни продукти и услуги, за да бъде винаги в крак с
+                новите тенденции и нуждите на българските фермери.
+                Софтуерът AgroSmart е разработен от Агро Смарт ООД.</p>
+            <h2>Нашата мисия</h2>
+            <p> Винаги да имате поглед върху случващото се във вашия земеделски бизнес.<br>
+                Да вземате правилните решения дори когато сте далеч от офиса.<br>
+                Да имате необходимата информация, без да се налага да губите време.<br>
+                Да разчитате на прецизни сметки и да ограничите допускането на грешки.<br>
+                Да имате пълна и леснодостъпна информация за земята, с която работите и процеса по изплащане на ренти.
+            </p>
+        </div>
+    </aside>
+    <aside class="right-content col-md-6">
+        <div class="about-image-container">
+            <img src="static/images/about_us.png" alt="about_us">
+        </div>
+    </aside>
+
+</section>
+
+<section id="features">
+    <div class="flex-container">
+        <div class="flex-slide mis">
+            <div class="flex-title flex-title-mis">Отчети</div>
+            <div class="flex-about flex-about-mis">
+                <div class="flex-circle"><span><i class="fas fa-chart-bar"></i></span></div>
+                <p>Избор от възможности за групиране на информацията.Систематизиран и графичен вид на цялата
+                    информация.</p></div>
+        </div>
+        <div class="flex-slide field">
+            <div class="flex-title">Ренти</div>
+            <div class="flex-about">
+                <div class="flex-circle"><span><i class="fas fa-seedling"></i></span></div>
+                <p> Дължими ренти по фирми, период от време и хора.Изплатени ренти по фирми, период от време и хора.</p>
+            </div>
+        </div>
+        <div class="flex-slide engineering">
+            <div class="flex-title">Договори</div>
+            <div class="flex-about">
+                <div class="flex-circle"><span><i class="fas fa-cogs"></i></span></div>
+                <p>Управление на операции по договор.Мониторинг,анализ и генериране на договори.</p></div>
+        </div>
+        <div class="flex-slide finance">
+            <div class="flex-title">Финанси</div>
+            <div class="flex-about">
+                <div class="flex-circle"><span><i class="fas fa-hand-holding-usd"></i></span></div>
+                <p>Информацията се групира по фирми, землища, стопански години и хора.Позволява лесно проследяване на изплатени и оставащи ренти, плащания и движението им във
+                    времето.</p></div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    {% if scroll %}
+    <script>
+        document.getElementById('{{ scroll }}').scrollIntoView();
+        //document.location.hash = '#' + '{{ scroll }}';
+
+    </script>
+    {% endif %}
+    {% include 'contact.html' %}
+</section>
+
+{% endblock content %}
+
+{% block javascript %}
+
+<script src="{{ url_for('static',filename='js/home.js')}}"></script>
+
+{% endblock javascript  %}

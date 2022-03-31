@@ -1,0 +1,43 @@
+{% with messages = get_flashed_messages(category_filter=["edit_contract_msg"]) %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+
+{% endif %}
+{% endwith %}
+
+<form id="edit_contract_form" action="{{url_for('edit_contract', contract_id=contract.id)}}" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="file-container">
+        <p class="text-left">Качете pdf на подписан договор</p>
+        {{ form.doc_path }}
+    </div>
+    {% for error in form.doc_path.errors %}
+    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+         role="alert">
+        <strong>{{ error }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    <div class="edit-input-container" style="display: flex;">
+        <div class="pointer-shape"><span>Бележки</span></div>
+        {{ form.notes( cols="30" ,rows="10") }}
+    </div>
+
+    {% if stored_doc_path is defined %}
+    <input type="hidden" value='{{stored_doc_path}}' id="stored_doc_path">
+    {% endif %}
+    <div class="edit-contract-buttons-container">
+        <input type="button" name="cancel" id="edit_contract_cancel_btn" class=" action-button" value="Откажи"/>
+        <input type="submit" name="submit" class="submit action-button" id="edit-contract-btn" value="Редактирай"/>
+    </div>
+
+</form>

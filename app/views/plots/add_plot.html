@@ -1,0 +1,329 @@
+<div class="modal fade" id="addPlotModal" tabindex="-1" role="dialog" aria-labelledby="addPlotModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div><i class="fas fa-plus-circle"></i></div>
+                <h4 class="modal-title" id="addOwnerModalLabel">Добавяне на парцел</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <!-- MultiStep Form -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="add_plot_form" action="{{url_for('add_plot', owner_id = owner_id)}}" method="post"
+                                  enctype="multipart/form-data">
+                                {{ form.hidden_tag() }}
+                                <!-- progressbar -->
+                                <ul id="progressbar" class="row">
+                                    <li class="active col-md-3">Избор на собственик</li>
+                                    <li class="col-md-3">Информация за парцел</li>
+                                    <li class="col-md-3">Собственост</li>
+                                    <li class="col-md-3">Преглед</li>
+                                </ul>
+                                <!-- fieldsets -->
+                                <fieldset>
+                                    <h2 class="fs-title">Избор на собственик</h2>
+                                    <div class="row table-top mb-3">
+                                        <div class="search-container col-12">
+                                            <input class="form-control tableSearch" id="select_owner_search" type="text"
+                                                   placeholder="Търси"><span><i
+                                                class="fas fa-search"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table select-owners-table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Име</th>
+                                                <th scope="col">ЕГН/БУЛСТАТ</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for owner in owners %}
+                                            <tr owner_id={{owner.id}}>
+                                                <td>{{ owner.name }}</td>
+                                                <td>{{ owner.egn }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                    <input type="button" name="next" class="next action-button first-next-btn"
+                                           value="Следващ"/>
+                                </fieldset>
+                                <fieldset>
+                                    <h2 class="fs-title">Информация за парцел</h2>
+                                    <div class="input-container">
+                                        {{ form.id(placeholder="EKATTE.район.имот",required=False) }}
+                                    </div>
+                                    {% for error in form.id.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        {{ form.locality_id( placeholder="EKATTE",required=False)}}
+                                        {{ form.locality_name(placeholder="Землище") }}
+                                    </div>
+                                    {% for error in form.locality_id.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        {{ form.sublocality_id(placeholder="Масив",required=False) }}
+                                        {{ form.sublocality_name(placeholder="Местност") }}
+                                    </div>
+                                    {% for error in form.sublocality_id.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        {{ form.plot(placeholder="Имот") }}
+                                    </div>
+                                    {% for error in form.plot.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        {{ form.category }}
+                                    </div>
+                                    {% for error in form.category.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        {{ form.use_type_id }}
+                                    </div>
+                                    {% for error in form.use_type_id.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        {{ form.area_by_doc(placeholder='Площ по документ(дка)',required=False) }}
+                                    </div>
+                                    {% for error in form.area_by_doc.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        {{ form.area_workable(placeholder='Изп.площ (дка)',required=False )}}
+                                    </div>
+                                    {% for error in form.area_workable.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        {{ form.notes(placeholder='Бележки') }}
+                                    </div>
+
+                                    <input type="button" name="previous"
+                                           class="previous action-button-previous first-prev-btn"
+                                           value="Предишен"/>
+                                    <input type="button" name="next" class="next action-button second-next-btn"
+                                           value="Следващ"/>
+                                </fieldset>
+                                <fieldset>
+                                    <h2 class="fs-title">Собственост</h2>
+
+                                    <div class="input-container">
+                                        {{ form.doc_number(placeholder='Номер на документ',required=False)}}
+                                    </div>
+                                    {% for error in form.doc_number.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        {{ form.doc_date(placeholder='Дата на документа',required=False) }}
+                                    </div>
+                                    {% for error in form.doc_date.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="parts-calc-container">
+                                        <div class="row">
+                                            <div class="col-4 label-container plus">
+                                                <label for="input-container">Идеални части</label>
+                                            </div>
+                                            <div class="input-container col-8">
+                                                {{ form.owned_plot_fraction_numerator }}
+                                                <span>/</span>
+                                                {{ form.owned_plot_fraction_denominator }}
+                                                <span>от</span>
+                                                {{ form.area_display() }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 label-container equal">
+                                                <label for="input-container">Площ(дка)</label>
+                                            </div>
+                                            <div class="input-container col-8">
+                                                {{ form.additional_owned_area }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 label-container">
+                                                <label for="input-container">Обща притежавана площ(дка)</label>
+                                            </div>
+                                            <div class="input-container col-8">
+                                                {{ form.total_owned_area }}
+                                            </div>
+                                        </div>
+                                        {% for error in form.total_owned_area.errors %}
+                                        <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                             role="alert">
+                                            <strong>{{ error }}</strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+                                    <div>
+                                        <p class="text-left">Качете pdf на документ за собственост</p>
+                                        {{ form.doc_path }}
+                                    </div>
+                                    {% for error in form.doc_path.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+
+                                    <input type="button" name="previous" class="previous action-button-previous"
+                                           value="Предишен"/>
+                                    <input type="button" name="next" class="next action-button" value="Следващ"/>
+                                </fieldset>
+                                <fieldset>
+                                    <h2 class="fs-title">Преглед</h2>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading mb-2">Информация за парцел</div>
+                                        <div class="panel-body">
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>ЕККАТЕ.район.имот</span></div>
+                                                <input type="text" class="col-8" name="id_preview" value="">
+                                            </div>
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Категория</span></div>
+                                                <input type="text" class="col-8" name="category_preview" value="">
+                                            </div>
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>НТП</span></div>
+                                                <input type="text" class="col-8" name="use_type_id_preview" value="">
+                                            </div>
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Площ по договор</span></div>
+                                                <input type="text" class="col-8" name="area_by_doc_preview" value="">
+
+                                            </div>
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Използваема площ</span></div>
+                                                <input type="text" class="col-8" name="area_workable_preview" value="">
+                                            </div>
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Бележки</span></div>
+                                                <textarea name="notes_preview" class="col-8" cols="30"
+                                                          rows="10"></textarea>
+                                            </div>
+                                            <div class="panel-heading mb-2">Информация за собственост</div>
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Номер на документ</span></div>
+                                                <input type="text" class="col-8" name="doc_number_preview" value="">
+                                            </div>
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Дата на документ</span></div>
+                                                <input type="text" class="col-8" name="doc_date_preview" value="">
+                                            </div>
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Обща притежавана площ</span>
+                                                </div>
+                                                <input type="text" class="col-8" name="total_owned_area_preview"
+                                                       value="">
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <input type="button" name="previous"
+                                           class="previous action-button-previous col-md-3"
+                                           value="Предишен"/>
+
+                                    {{ form.add_single_plot_btn(class="submit action-button col-md-3" ) }}
+                                    {{ form.add_multiple_plots_btn(class="submit action-button col-md-3" ) }}
+                                    {{ form.add_contract_after_plot_btn(class="submit action-button col-md-3" ) }}
+
+
+                                </fieldset>
+
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.MultiStep Form -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="action-button" id="add_plot_cancel_btn" data-dismiss="modal">Откажи
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

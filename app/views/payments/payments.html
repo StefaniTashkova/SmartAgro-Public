@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block css%}
+<link href="{{ url_for('static', filename='css/payments.css') }}" rel="stylesheet">
+{% endblock css%}
+
+{% block content %}
+<section id="payments">
+    {% with messages = get_flashed_messages(category_filter=["generate_payment_msg","make_payment_msg"]) %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="row table-top mb-3">
+        <div class="col-8 payments-top ">
+            <h5 class="mb-0">Плащания</h5>
+        </div>
+        <div class="search-container col-4">
+            <input id="search_query_input" class="form-control tableSearch" type="text" placeholder="Търси">
+            <a class="btn" id="search_anchor" href="{{ url_for('payments', page=1) }}"><i class="fas fa-search"></i></a>
+        </div>
+        <div class="col-md-12 generate-btn-container row p-0 mx-0 mt-3">
+            <button type="button" class="btn generate-payments-btn col-md-4 mr-1" data-toggle="modal"
+                    data-target="#generatePaymentsModal"><i class="fas fa-print mr-2"></i>Генериране на ордери и
+                платежни
+            </button>
+            <a href="{{ url_for('download_generated_payments_docs') }}" target="blank"
+               class="btn download-generated-payments-btn col-md-4"><i class="fas fa-file-download mr-2"></i>Изтегляне
+                на ордери и
+                платежни
+            </a>
+        </div>
+
+    </div>
+    <table class="table table-responsive-sm  payments-table">
+        <thead>
+        <tr>
+            <th scope="col">Дата</th>
+            <th scope="col">Вид</th>
+            <th scope="col">Стойност</th>
+            <th scope="col">Титуляр</th>
+            <th scope="col">Банкова сметка</th>
+            <th scope="col">Стопанска година</th>
+            <th scope="col">Договори</th>
+            <th scope="col">Статус</th>
+            <th scope="col">Опции</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for payment in payments.items %}
+        <tr data-href="">
+            <td>{{ payment.date.strftime('%d/%m/%Y') }}</td>
+            <td>{{ payment.type }}</td>
+            {% if payment.paid_amount_bgn is not none %}
+            <td>{{ payment.paid_amount_bgn }}</td>
+            {% else %}
+            <td>0.00</td>
+            {% endif %}
+            <td> {{ payment.contract.contract_owners[0].owner.name }}</td>
+            <td> {{ payment.contract.contract_owners[0].owner.IBAN }}</td>
+            <td> {{ payment.agricultural_year }}</td>
+            <td> {{ payment.contract.id }}</td>
+            <td> {{ payment.status }}</td>
+            <td class="icon-actions">
+                {% if payment.status == 'НЕИЗПЪЛНЕНО' %}
+                <span type="button" id="make-payment-button-{{payment.id}}" class="make-payment-button"
+                      data-toggle="modal" data-target="#makePaymentModal"
+                      data-url="{{ url_for('get_payment_data', payment_id=payment.id) }}">
+                    <i class="fab fa-cc-amazon-pay" title="Извършване на плащане"></i>
+                </span>
+                {% endif %}
+                {% if payment.status == 'ИЗПЪЛНЕНО' %}
+                <i class="fas fa-eye" data-href="{{url_for('payment',payment_id=payment.id)}}" title="Преглед на плащане"></i>
+                {% endif %}
+                <i class="fas fa-trash payment-delete" data-url="{{url_for('payment',payment_id=payment.id)}}"
+                   title="Изтриване на плащане"></i>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <nav aria-label=" Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if prev_url %}
+            <li class="page-item"><a class="page-link" href="{{ prev_url }}">Previous</a></li>
+            {% endif %}
+            {% for page_num in payments.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=1) %}
+            {% if payments.page == page_num %}
+            <li class="page-item active"><a class="page-link"
+                                            href="{{url_for('payments',page=page_num)}}">{{page_num}}<span
+                    class="sr-only">(current)</span></a></li>
+            {% elif page_num %}
+            <li class="page-item"><a class="page-link" href="{{url_for('payments',page=page_num)}}">{{page_num}}</a>
+            </li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="" disabled>...</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if next_url %}
+            <li class="page-item"><a class="page-link" href="{{ next_url }}">Next</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</section>
+{% include '/payments/make_payment.html'%}
+
+<div class="modal fade" id="generatePaymentsModal" tabindex="-1" role="dialog" aria-labelledby="generatePaymentsModal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="generatePaymentsModal">Генериране на ордери и платежни </h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid p-0">
+                    <div class="transfer"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="loader-container col-12 text-center">
+                    <div class="loader"></div>
+                    <h5>Моля изчакайте</h5>
+                </div>
+                <button type="button" class="action-button" id="generate_payment_btn"
+                        data-href="{{url_for('generate_payments')}}">Генерирай
+                </button>
+                <button type="button" class="action-button" id="generate_payment_cancel_btn" data-dismiss="modal">Откажи
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+    owners_json = JSON.parse({{ owners_json | tojson }});
+</script>
+<script src="{{ url_for('static',filename='js/payments.js')}}"></script>
+
+{% endblock javascript  %}

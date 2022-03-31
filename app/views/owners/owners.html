@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block css%}
+<link href="{{ url_for('static', filename='css/owners.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/make_payment.css') }}" rel="stylesheet">
+{% endblock css%}
+
+{% block content %}
+<section id="owners">
+    <div class="row table-top mb-3">
+        <div class="col-8 owners-top">
+            <h5 class="mb-0">Собственици</h5>
+            <span type="button" data-toggle="modal" data-target="#addOwnerModal" id="open_addOwnerModal_btn"><i
+                    class="fas fa-user-plus" title="Добавяне на собственик"></i></span>
+        </div>
+        <div class="search-container col-4">
+            <input id="search_query_input" class="form-control tableSearch" type="text" placeholder="Търси">
+            <a class="btn" id="search_anchor" href="{{ url_for('owners', page=1) }}"><i class="fas fa-search"></i></a>
+        </div>
+    </div>
+    <table class="table table-responsive-sm  owners-table">
+        <thead>
+        <tr>
+            <th scope="col">Име</th>
+            <th scope="col">ЕГН</th>
+            <th scope="col">Собственик №</th>
+            <th scope="col">Опции</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for owner in owners.items %}
+        <tr>
+            <td>{{ owner.name }}</td>
+            <td>{{ owner.egn }}</td>
+            <td>{{ owner.id }}</td>
+            <td class="icon-actions">
+                <i class="fas fa-user-edit" data-href="{{url_for('owner',owner_id=owner.id)}}"
+                   title="Редактиране на собственик"></i>
+                <span type='button' data-toggle="popover" title="Договори" data-content='
+                    {% for record in owner.contract_owners %}
+                        <div>
+                            <span>Договор №:</span>
+                            <a href="{{url_for("contract",contract_id=record.contract_id)}}">{{record.contract_id}}</a>
+                        </div>
+                    {% endfor %}
+                ' data-html="true">
+                    <i class="fas fa-file-contract" title="Преглед на договор"></i>
+                </span>
+                <span class="payments-popover" type='button' data-toggle="popover" title="Неизпълнени плащания" data-content='
+                    <span>Плащане по договор №:</span>
+                    {% for record in owner.contract_owners %}
+                        {% for payment in record.contract.payments if payment.status == "НЕИЗПЪЛНЕНО" %}
+                            <div>
+                                <span type="button" id="make-payment-button-{{payment.id}}" class="make-payment-button"
+                                data-toggle="modal" data-target="#makePaymentModal"
+                                data-url="{{ url_for("get_payment_data", payment_id=payment.id) }}">
+                                {{ payment.contract_id }}</span>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                ' data-html="true">
+                    <i class="fas fa-dollar-sign" title="Извършване на плащане"></i>
+                </span>
+                <i class="fas fa-trash owner-delete" data-url="{{url_for('owner',owner_id=owner.id)}}"
+                   title="Изтриване на собственик"></i>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if prev_url %}
+            <li class="page-item"><a class="page-link" href="{{ prev_url }}">Previous</a></li>
+            {% endif %}
+            {% for page_num in owners.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=1) %}
+            {% if owners.page == page_num %}
+            <li class="page-item active"><a class="page-link"
+                                            href="{{url_for('owners',page=page_num)}}">{{page_num}}<span
+                    class="sr-only">(current)</span></a></li>
+            {% elif page_num %}
+            <li class="page-item"><a class="page-link" href="{{url_for('owners',page=page_num)}}">{{page_num}}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="" disabled>...</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if next_url %}
+            <li class="page-item"><a class="page-link" href="{{ next_url }}">Next</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+</section>
+
+{% include '/owners/add_owner.html' %}
+{% include '/payments/make_payment.html'%}
+
+{% endblock %}
+
+{% block javascript %}
+
+<script src="{{ url_for('static',filename='js/owners.js')}}"></script>
+
+{% endblock javascript  %}

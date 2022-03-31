@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block css%}
+<link href="{{ url_for('static', filename='css/contracts.css') }}" rel="stylesheet">
+{% endblock css%}
+
+{% block content %}
+<section id="contracts">
+    {% with messages = get_flashed_messages(category_filter=["add_contract_msg"]) %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="row table-top mb-3">
+        <div class="col-8 contracts-top">
+            <h5 class="mb-0">Договори</h5>
+            <span type="button" data-toggle="modal" data-target="#addContractModal" id="open_addContractModal_btn"><i
+                    class="fas fa-file-contract" title="Добавяне на договор"></i></span>
+        </div>
+        <div class="search-container col-4">
+            <input id="search_query_input" class="form-control tableSearch" type="text" placeholder="Търси">
+            <a class="btn" id="search_anchor" href="{{ url_for('contracts', page=1) }}"><i
+                    class="fas fa-search"></i></a>
+        </div>
+        <div class="col-md-8 print-btn-container">
+            <a href="{{ url_for('download_contracts') }}" target="blank" class="btn print-contracts-btn">
+                <i class="fas fa-file-download mr-2"></i>Изтегляне на всички договори</a>
+        </div>
+
+    </div>
+    <table class="table table-responsive-sm  contracts-table">
+        <thead>
+        <tr>
+            <th scope="col">Тип</th>
+            <th scope="col">Договор №</th>
+            <th scope="col">Дата на сключване</th>
+            <th scope="col">Валидност</th>
+            <th scope="col">Собственик</th>
+            <th scope="col">Опции</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for contract in contracts.items %}
+        <tr>
+            <td>{{ contract.contract_type_id.name }}</td>
+            <td>{{ contract.id }}</td>
+            <td>{{ contract.date_signed.strftime('%d/%m/%Y')}}</td>
+            <td>{{ contract.duration_years }} години</td>
+            <td>
+                {% for owner_record in contract.contract_owners %}
+                {{ owner_record.owner.name }}
+                {% endfor %}
+            </td>
+            <td class="icon-actions">
+                <i class="fas fa-file-signature" data-href="{{url_for('contract',contract_id=contract.id)}}"
+                   title="Редактиране на договор"></i>
+                <i class="fas fa-trash contract-delete" data-url="{{url_for('contract',contract_id=contract.id)}}"
+                   title="Изтриване на договор"></i>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <nav aria-label=" Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if prev_url %}
+            <li class="page-item"><a class="page-link" href="{{ prev_url }}">Previous</a></li>
+            {% endif %}
+            {% for page_num in contracts.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=1) %}
+            {% if contracts.page == page_num %}
+            <li class="page-item active"><a class="page-link"
+                                            href="{{url_for('contracts',page=page_num)}}">{{page_num}}<span
+                    class="sr-only">(current)</span></a></li>
+            {% elif page_num %}
+            <li class="page-item"><a class="page-link" href="{{url_for('contracts',page=page_num)}}">{{page_num}}</a>
+            </li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="" disabled>...</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if next_url %}
+            <li class="page-item"><a class="page-link" href="{{ next_url }}">Next</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+</section>
+{% include '/contracts/add_contract.html' %}
+
+{% if owner_id is defined %}
+<input type="hidden" name="" class="preselected-owner-id" value="{{ request.args.get('owner_id') }}">
+{% endif %}
+
+{% endblock %}
+
+{% block javascript %}
+
+<script src="{{ url_for('static',filename='js/contracts.js')}}"></script>
+
+{% endblock javascript  %}

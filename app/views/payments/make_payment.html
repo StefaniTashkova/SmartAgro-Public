@@ -1,0 +1,164 @@
+{% with messages = get_flashed_messages(category_filter=["make_payment_msg"]) %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="modal fade" id="makePaymentModal" tabindex="-1" role="dialog" aria-labelledby="makePaymentModal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="makePaymentModal">Рента - стопанска година 2019/2020 </h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <section id="payment_contract_details" class="bordered-container jumbotron row">
+                        <div class="payment-modal-section-title"><h5>Детайли по договор</h5></div>
+                        <div class="col-md-4">
+                            <div class="view-details mt-2"><span id="contract_id_field"></span></div>
+                            <div class="view-details mt-2"><span id="owner_name_field"></span></div>
+                            <div class="view-details mt-2"><span id="owner_egn_field"></span></div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="table-responsive">
+                                <table class="table contract-details ">
+                                    <thead class="">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Площ</th>
+                                        <th>Местност</th>
+                                        <th>Имот №</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td>Обща площ:</td>
+                                        <td id="total_area_cell">180</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="rent_details" class="bordered-container jumbotron row">
+                        <div class="payment-modal-section-title"><h5>Рента</h5></div>
+                        <section id="rent_main_details" class="bordered-container jumbotron col-md-6 mt-3">
+                            <div class="payment-modal-section-title"><h5>Основна информация</h5></div>
+                            <div class="row mr-0">
+                                <label for="" class="col-md-2 mb-0">Дата</label>
+                                <div class="view-details col-md-10"><span id="payment_date_field"></span></div>
+                            </div>
+                            <div class="row mr-0">
+                                <label for="" class="col-md-4 mb-0">Цена/кг.на декар</label>
+                                <div class="col-md-8">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="price_per_dka_radio"
+                                               id="kg_per_dka_rent_radio" value="">
+                                        <label class="form-check-label" for="kg_per_dka_rent_radio"
+                                               id="kg_per_dka_field"></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="price_per_dka_radio"
+                                               id="kg_per_dka_contract_radio" value="">
+                                        <label class="form-check-label" for="kg_per_dka_contract_radio"
+                                               id="kg_per_dka_in_contract_field"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="view-details col-md-10 mb-2"><span id="rent_per_unit_of_area_field"></span>
+                                </div>
+                            </div>
+                            <div class="row mr-0">
+                                <label for="" class="col-md-2 mb-0">Обща сума</label>
+                                <div class="view-details col-md-10"><span id="total_sum_field"></span></div>
+                            </div>
+                            <div class="row mr-0">
+                                <label for="" class="col-md-2 mb-0">Общо кг:</label>
+                                <div class="view-details col-md-10"><span id="total_kg_field"></span></div>
+                            </div>
+
+                        </section>
+                        <section id="rent_calculator" class="bordered-container jumbotron col-md-6 mt-3">
+                            <div class="payment-modal-section-title"><h5><i class="fas fa-calculator mr-2"></i>Калкулатор
+                            </h5></div>
+                            <form action="{{url_for('make_payment', payment_id = 0)}}" method="post" id="payment_form">
+                                {{ payment_form.hidden_tag() }}
+                                <div class="input-container">
+                                    <label for="custom-radio">Вид плащане</label>
+                                    {% for subfield in payment_form.payment_type %}
+                                    <div class="custom-control custom-radio mx-3">
+                                        {{ subfield(class='custom-control-input') }} {{
+                                        subfield.label(class='custom-control-label') }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <div id="calculator_selects_container">
+                                    <div class="input-container row m-0 mb-3">
+                                        {{ payment_form.grain_type(class='col-md-4') }}
+                                        {{ payment_form.grain_weight(class='col-md-8',placeholder='Зърно кг.') }}
+                                        {% for error in payment_form.grain_weight.errors %}
+                                        <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                             role="alert">
+                                            <strong>{{ error }}</strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="input-container row m-0 mb-3">
+                                        {{ payment_form.mixed_grain_holder(class='col-md-4') }}
+                                        {{ payment_form.mixed_grain_weight(class='col-md-8',placeholder='Смески кг.') }}
+                                        {% for error in payment_form.mixed_grain_weight.errors %}
+                                        <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                             role="alert">
+                                            <strong>{{ error }}</strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 text-center">
+                                    <label for="paid_amount_bgn" id="paid_amount_label">Крайна сума за доплащане</label>
+                                    {{payment_form.paid_amount_bgn(class='view-details text-center')}}
+                                </div>
+                                <div class="payment-buttons-container">
+                                    <input type="submit" name="make_payment_submit" class="action-button" value="Плати">
+                                </div>
+                                {% if preclicked_payment_id is defined and preclicked_payment_id is not none %}
+                                <input type="hidden" name="" id="preclicked_payment_id"
+                                       value="{{ preclicked_payment_id }}">
+                                {% endif %}
+                            </form>
+                        </section>
+                    </section>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="action-button" id="make_payment_cancel_btn" data-dismiss="modal">Откажи
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+

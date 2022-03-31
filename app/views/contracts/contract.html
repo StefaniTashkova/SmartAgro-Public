@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block css%}
+<link href="{{ url_for('static', filename='css/contracts.css') }}" rel="stylesheet">
+{% endblock css%}
+
+{% block content %}
+
+<section class="contract-info container-fluid">
+    <div class="contracts-top p-2 mb-4 row mx-0">
+        <span>Договор: {{contract.id}} </span>
+    </div>
+    <div class="contract-info-container row mx-0">
+        <section id="contract_personal_info" class="bordered-container jumbotron col-md-6">
+            <div class="edit-contract-section-title"><h5>Детайли</h5></div>
+            <span type="button" id="edit-icon-btn"><i class="fas fa-file-signature" title="Редактиране на договор"></i></span>
+            {% include '/contracts/edit_contract.html' %}
+        </section>
+        <aside id="contract_more_info" class="col-md-6 pr-0">
+            <div id="contract_details" class="bordered-container jumbotron">
+                <div class="edit-contract-section-title"><h5>Детайли по договор</h5></div>
+                <div class="edit-input-container" style="display: flex;">
+                    <div class="pointer-shape"><span>Тип</span></div>
+                    <input type="text" value="{{ contract.contract_type_id.name}}">
+                </div>
+                <div class="edit-input-container" style="display: flex;">
+                    <div class="pointer-shape"><span>Дата на сключване</span></div>
+                    {{ form.date_signed }}
+                </div>
+                <div class="edit-input-container" style="display: flex;">
+                    <div class="pointer-shape"><span>Считано от</span></div>
+                    {{ form.date_started }}
+                </div>
+                <div class="edit-input-container" style="display: flex;">
+                    <div class="pointer-shape"><span>Място на подписване</span></div>
+                    <input type="text"
+                           value="{{ contract.locality.name}} ,{{contract.locality.municipality}}, {{contract.locality.region }}">
+                </div>
+
+
+            </div>
+            <div id="contract_plots" class="bordered-container jumbotron">
+                <div class="edit-contract-section-title"><h5>Парцели по договор</h5></div>
+                <div class="table-responsive">
+                    <table class="table plots-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Идентификатор</th>
+                            <th scope="col">Локация</th>
+                            <th scope="col">Площ по док.(дка)</th>
+                            <th scope="col">Опции</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for ownership in ownerships %}
+                        <tr>
+                            <td>{{ ownership.plot.id }}</td>
+                            <td>{{ ownership.plot.sublocality.name }}, {{ ownership.plot.locality.name }}</td>
+                            <td>{{ ownership.plot.area_by_doc|round(2) }}</td>
+                            <td class="icon-actions">
+                                <button class="btn btn-info" data-href="{{url_for('plot',ownership_id=ownership.id)}}">
+                                    Още...
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="contract_owners" class="bordered-container jumbotron">
+                <div class="edit-contract-section-title"><h5>Собственици</h5></div>
+                 <div class="table-responsive">
+                    <table class="table owners-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Име</th>
+                            <th scope="col">ЕГН</th>
+                            <th scope="col">Опции</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for owner in owners %}
+                        <tr>
+                            <td>{{ owner.name }}</td>
+                            <td>{{ owner.egn }}</td>
+                            <td class="icon-actions">
+                                <button class="btn btn-info" data-href="{{url_for('owner',owner_id=owner.id)}}">
+                                    Още...
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div id="contract_payments" class="bordered-container jumbotron">
+                <div class="edit-contract-section-title"><h5>Плащания</h5></div>
+                <div class="table-responsive">
+                    <table class="table payments-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Статус</th>
+                            <th scope="col">Дата</th>
+                            <th scope="col">Стойност(лв)</th>
+                            <th scope="col">По дог. №</th>
+                            <th scope="col">Опции</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for payment in contract.payments %}
+                            <tr>
+                                <td>{{ payment.status }}</td>
+                                <td>{{ payment.date.strftime('%d/%m/%Y') }}</td>
+                                <td>{{ payment.paid_amount_bgn }}</td>
+                                <td>{{ payment.contract_id }}</td>
+                                <td class="icon-actions">
+                                    <button class="btn btn-info" data-href="{{url_for('payment',payment_id=payment.id)}}">
+                                        Още...
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+        </aside>
+    </div>
+
+</section>
+
+
+{% endblock %}
+
+{% block javascript %}
+
+<script src="{{ url_for('static',filename='js/contracts.js')}}"></script>
+
+{% endblock javascript  %}

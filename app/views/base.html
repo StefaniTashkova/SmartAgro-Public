@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroSmart</title>
+    <link rel="stylesheet"
+          href="{{url_for('static',filename='node_modules/@fortawesome/fontawesome-free/css/all.css')}}">
+    <link rel="stylesheet"
+          href="{{url_for('static',filename='node_modules/bootstrap-fileinput/themes/explorer-fas/theme.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='node_modules/bootstrap/dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet"
+          href="{{url_for('static',filename='node_modules/bootstrap-fileinput/css/fileinput.min.css')}}">
+    <link rel="stylesheet"
+          href="{{url_for('static',filename='node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css')}}">
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='lib/dual-listbox-transfer/icon_font/css/icon_font.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='lib/dual-listbox-transfer/css/jquery.transfer.css')}}">
+    <link rel="shortcut icon" href="#">
+    {% block css %}{% endblock %}
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="250">
+<header>
+    {% if current_user.is_anonymous %}
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="navbar-top">
+        <!-- Brand -->
+        <div class="logo-container col-2 ">
+            <a href=""><img src="../static/images/logo.png" alt="logo" id="logo"></a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Начало</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">За нас</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#features">Модули</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Контакти</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="login_link">Вход</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% else %}
+    <nav class="navbar navbar-expand-md navbar-light fixed-top" id="navbar-logged">
+        <!-- Brand -->
+        <div class="logo-container col-2 ">
+            <a href=""><img src="../static/images/logo.png" alt="logo" id="logo"></a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item nav-item-owners">
+                    <a class="nav-link" href="{{url_for('owners')}}">Собственици</a>
+                </li>
+                <li class="nav-item nav-item-plots">
+                    <a class="nav-link" href="{{url_for('plots')}}">Парцели</a>
+                </li>
+                <li class="nav-item nav-item-contracts">
+                    <a class="nav-link" href="{{url_for('contracts')}}">Договори</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-item-payments" href="{{url_for('payments')}}">Плащания</a>
+                </li>
+                <li class="nav-item user-dropdown">
+
+                    <label for="profile2" class="profile-dropdown">
+                        <input type="checkbox" id="profile2">
+                        <label for="profile2"><i class="fas fa-user-circle"></i></label>
+                        <ul>
+                            <li><a href="{{url_for('settings')}}"><i class="fas fa-user-cog"></i>Настройки</a></li>
+                            <li><a class='nav-link' href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Изход</a></li>
+                        </ul>
+                    </label>
+
+
+                </li>
+            </ul>
+           
+            <!-- <div class="nav-icons col-2">
+                <i class="fas fa-user-cog"></i>
+                <i class="fas fa-bell"></i>
+            </div> -->
+        </div>
+    </nav>
+    {% endif %}
+</header>
+
+<main>
+    {% block content %}
+
+    {% endblock %}
+</main>
+
+
+<footer class="footer">
+    <div class="container bottom_border">
+        <div class="row">
+            <div class=" col-sm-4 col-md col-sm-4  col-12 col">
+                <h5 class="headin5_amrc col_white_amrc pt2">Намерете ни</h5>
+                <!--headin5_amrc-->
+                <p class="mb10">Можете да се свържете с нас онлайн, чрез контактната форма или на долу посоченият имейл, както и да ни намерите в офиса намиращ се на</p>
+                <p><i class="fa fa-location-arrow"></i> ул. Панайот Хитов №69 eт.1 </p>
+                <p><i class="fa fa-phone"></i> 0878256122 </p>
+                <p><i class="fa fa fa-envelope"></i> agrosmart@gmail.com </p>
+
+
+            </div>
+
+
+            <div class=" col-sm-4 col-md  col-6 col">
+                <h5 class="headin5_amrc col_white_amrc pt2">Бързи линкове</h5>
+                <!--headin5_amrc-->
+                <ul class="footer_ul_amrc">
+                    <li><a href="">Линк 1</a></li>
+                    <li><a href="">Линк 2</a></li>
+                    <li><a href="">Линк 3</a></li>
+                    <li><a href="">Линк 4</a></li>
+                    <li><a href="">Линк 5</a></li>
+                    <li><a href="">Линк 6</a></li>
+                </ul>
+                <!--footer_ul_amrc ends here-->
+            </div>
+
+
+            <div class=" col-sm-4 col-md  col-6 col">
+                <h5 class="headin5_amrc col_white_amrc pt2">Бързи линкове</h5>
+                <!--headin5_amrc-->
+                <ul class="footer_ul_amrc">
+                    <li><a href="">Линк 7</a></li>
+                    <li><a href="">Линк 8</a></li>
+                    <li><a href="">Линк 9</a></li>
+                    <li><a href="">Линк 10</a></li>
+                    <li><a href="">Линк 11</a></li>
+                    <li><a href="">Линк 12</a></li>
+                </ul>
+                <!--footer_ul_amrc ends here-->
+            </div>
+
+
+            <div class=" col-sm-4 col-md  col-12 col">
+                <h5 class="headin5_amrc col_white_amrc pt2">Последвайте ни</h5>
+                <!--headin5_amrc ends here-->
+
+                <ul class="footer_ul2_amrc">
+                    <li><a href="#"><i class="fab fa-twitter fleft padding-right"></i> </a>
+                        <p>Нашият туитър акаунт<a href="#">https://www.lipsum.com/</a>
+                        </p></li>
+                    <li><a href="#"><i class="fab fa-twitter fleft padding-right"></i> </a>
+                        <p>Нашият инстаграм акаунт<a href="#">https://www.lipsum.com/</a>
+                        </p></li>
+                    <li><a href="#"><i class="fab fa-twitter fleft padding-right"></i> </a>
+                        <p>Нашият фейсбук профил<a href="#">https://www.lipsum.com/</a>
+                        </p></li>
+                </ul>
+                <!--footer_ul2_amrc ends here-->
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <ul class="foote_bottom_ul_amrc">
+            <li><a href="#home">Начало</a></li>
+            <li><a href="#about">За нас</a></li>
+            <li><a href="#features">Модули</a></li>
+            <li><a href="#contact">Контакти</a></li>
+        </ul>
+
+        <p class="text-center">Всички права са запазени @2020 | Проектирано от  <a href="#">AgroSmart</a></p>
+
+        <ul class="social_footer_ul">
+            <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href=""><i class="fab fa-twitter"></i></a></li>
+            <li><a href=""><i class="fab fa-linkedin"></i></a></li>
+            <li><a href=""><i class="fab fa-instagram"></i></a></li>
+        </ul>
+    </div>
+</footer>
+
+
+<script src="{{url_for('static',filename='node_modules/jquery/dist/jquery.min.js')}}"></script>
+<!-- <script src="{{url_for('static',filename='node_modules/popper.js/dist/popper.js')}}"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="{{url_for('static',filename='node_modules/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static',filename='node_modules/bootstrap-fileinput/js/plugins/piexif.js')}}"></script>
+<script src="{{url_for('static',filename='node_modules/bootstrap-fileinput/js/fileinput.min.js')}}"></script>
+<script src="{{url_for('static',filename='node_modules/bootstrap-fileinput/themes/fas/theme.js')}}"></script>
+<script src="{{url_for('static',filename='lib/dual-listbox-transfer/js/jquery.transfer.js')}}"></script>
+<script src="{{url_for('static',filename='node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js')}}"></script>
+<script src="{{ url_for('static',filename='js/base.js')}}"></script>
+
+{% block javascript %}
+
+{% endblock %}
+
+</body>
+</html>

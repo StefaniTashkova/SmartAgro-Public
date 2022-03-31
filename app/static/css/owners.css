@@ -1,0 +1,399 @@
+.active {
+  background: none; }
+
+  main {
+    background-image: url("/static/images/background.png");
+    padding: 20px; }
+
+    .nav-item-owners {
+      background-color: #CF5C36; }
+
+      #owners {
+        padding: 10px;
+        width: 90%;
+        margin: auto; }
+
+        .table-top {
+          width: 100%;
+          margin: 0; }
+
+          .owners-top {
+            background: #050517;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            color: white;
+            border-top: 2px solid #cf5c36; }
+            .owners-top h5 {
+              flex-grow: 2; }
+
+.icon-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+  .icon-actions i, .icon-actions span {
+    flex-grow: 1;
+    font-size: 20px; }
+
+    .search-container {
+      padding: 0;
+      display: flex;
+      align-items: center; }
+
+      #search_anchor {
+        height: 100%;
+        align-items: center;
+        display: flex;
+        background: #050517; }
+
+        .tableSearch {
+          height: 100%;
+          border-right: none;
+          border-top: none; }
+
+          .tableSearch:focus {
+            border: none;
+            border-bottom: 2px solid #CF5C36;
+            box-shadow: none; }
+
+            .fa-user-plus {
+              cursor: pointer;
+              font-size: 20px; }
+
+              .fa-search {
+                color: #fff;
+                font-size: 20px; }
+
+                .owners-table thead, .plots-table thead, .contracts-table thead,
+                .payments-table thead {
+                  background: #cf5c36;
+                  color: #fff; }
+
+                  .owners-table tbody tr:nth-child(even),
+                  #owner_plots table.plots-table tbody tr:nth-child(even),
+                  .contracts-table tbody tr:nth-child(even), .payments-table tbody tr:nth-child(even) {
+                    background: #efc88b; }
+
+                    .owners-table tbody tr:nth-child(odd),
+                    #owner_plots table.plots-table tbody tr:nth-child(odd),
+                    .contracts-table tbody tr:nth-child(odd), .payments-table tbody tr:nth-child(odd) {
+                      background: #f4e3b2; }
+
+                      td.icon-actions {
+                        cursor: pointer; }
+
+                        ul.pagination a.page-link {
+                          color: #050517; }
+
+                          ul.pagination a.page-link:hover {
+                            color: #efc88b; }
+
+                            ul.pagination a.page-link:focus {
+                              box-shadow: none; }
+
+                              ul.pagination .page-item.active .page-link {
+                                background-color: #050517;
+                                border-color: #050517; }
+
+                                #addOwnerModal > div > div > div.modal-header {
+                                  background: #050517;
+                                  color: #fff;
+                                  display: flex;
+                                  flex-direction: column;
+                                  align-items: center; }
+
+                                  #addOwnerModal > .modal-title {
+                                    text-align: center; }
+
+                                    #addOwnerModal > div > div > div.modal-header > button {
+                                      color: #fff;
+                                      opacity: 7;
+                                      padding: 0;
+                                      margin: 0;
+                                      align-self: flex-end; }
+
+                                      #addOwnerModal .modal-footer {
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center; }
+
+                                        .fa-plus-circle {
+                                          font-size: 20px; }
+
+                                          #msform {
+                                            text-align: center;
+                                            position: relative; }
+
+                                            #msform fieldset {
+                                              background: white;
+                                              border: 0 none;
+                                              border-radius: 0px;
+                                              box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+                                              padding: 20px 30px;
+                                              box-sizing: border-box;
+                                              width: 100%;
+                                              position: relative; }
+
+                                              #msform fieldset:not(:first-of-type) {
+                                                display: none; }
+
+                                                .input-container {
+                                                  display: -ms-flexbox;
+                                                  display: flex;
+                                                  width: 100%;
+                                                  margin-bottom: 15px; }
+
+                                                  .input-container label {
+                                                    display: flex;
+                                                    align-items: center;
+                                                    justify-content: center; }
+
+                                                    .icon {
+                                                      background: #050517;
+                                                      color: white;
+                                                      min-width: 50px;
+                                                      display: flex;
+                                                      align-items: center;
+                                                      justify-content: center;
+                                                      font-size: 20px; }
+
+                                                      #msform input, #msform textarea {
+                                                        padding: 15px;
+                                                        border: 1px solid #ccc;
+                                                        border-radius: 0px;
+                                                        width: 100%;
+                                                        box-sizing: border-box;
+                                                        font-family: montserrat;
+                                                        color: #2C3E50;
+                                                        font-size: 13px;
+                                                        resize: none; }
+
+                                                        #msform input:focus, #msform textarea:focus, #msform select:focus {
+                                                          -moz-box-shadow: none !important;
+                                                          -webkit-box-shadow: none !important;
+                                                          box-shadow: none !important;
+                                                          border: 1px solid #050517;
+                                                          outline-width: 0;
+                                                          transition: All 0.5s ease-in;
+                                                          -webkit-transition: All 0.5s ease-in;
+                                                          -moz-transition: All 0.5s ease-in;
+                                                          -o-transition: All 0.5s ease-in; }
+
+                                                          #msform .action-button, #edit_owner_form .action-button,
+                                                          #addOwnerModal .modal-footer .action-button {
+                                                            width: 100px;
+                                                            background: #050517;
+                                                            font-weight: bold;
+                                                            color: white;
+                                                            border: 0 none;
+                                                            border-radius: 25px;
+                                                            cursor: pointer;
+                                                            padding: 10px 5px;
+                                                            margin: 10px 5px; }
+
+                                                            #addOwnerModal .modal-footer .action-button {
+                                                              background: #cf5c36;
+                                                              outline: none; }
+
+                                                              #msform .action-button:hover, #msform .action-button:focus,
+                                                              #edit_owner_form .action-button:hover, #edit_owner_form .action-button:focus {
+                                                                box-shadow: 0 0 0 2px white, 0 0 0 3px #050517; }
+
+                                                                #addOwnerModal .modal-footer .action-button:hover,
+                                                                #addOwnerModal .modal-footer .action-button:focus {
+                                                                  box-shadow: 0 0 0 2px white, 0 0 0 3px #cf5c36;
+                                                                  outline: none; }
+
+                                                                  #msform .action-button-previous {
+                                                                    width: 100px;
+                                                                    background: #C5C5F1;
+                                                                    font-weight: bold;
+                                                                    color: white;
+                                                                    border: 0 none;
+                                                                    border-radius: 25px;
+                                                                    cursor: pointer;
+                                                                    padding: 10px 5px;
+                                                                    margin: 10px 5px; }
+
+                                                                    #msform .action-button-previous:hover, #msform .action-button-previous:focus {
+                                                                      box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1; }
+
+                                                                      #add-owner-btn {
+                                                                        width: 200px !important; }
+
+                                                                        .fs-title {
+                                                                          font-size: 18px;
+                                                                          text-transform: uppercase;
+                                                                          color: #2C3E50;
+                                                                          margin-bottom: 10px;
+                                                                          letter-spacing: 2px;
+                                                                          font-weight: bold; }
+
+                                                                          .fs-subtitle {
+                                                                            font-weight: normal;
+                                                                            font-size: 13px;
+                                                                            color: #666;
+                                                                            margin-bottom: 20px; }
+
+                                                                            #progressbar {
+                                                                              margin-bottom: 30px;
+                                                                              overflow: hidden;
+                                                                              counter-reset: step;
+                                                                              padding: 0; }
+
+                                                                              #progressbar li {
+                                                                                list-style-type: none;
+                                                                                color: #050517;
+                                                                                text-transform: uppercase;
+                                                                                font-size: 9px;
+                                                                                width: 33.33%;
+                                                                                float: left;
+                                                                                position: relative;
+                                                                                letter-spacing: 1px; }
+
+                                                                                #progressbar li:before {
+                                                                                  content: counter(step);
+                                                                                  counter-increment: step;
+                                                                                  width: 24px;
+                                                                                  height: 24px;
+                                                                                  line-height: 26px;
+                                                                                  display: block;
+                                                                                  font-size: 12px;
+                                                                                  color: #333;
+                                                                                  background: white;
+                                                                                  border-radius: 25px;
+                                                                                  margin: 0 auto 10px auto;
+                                                                                  text-align: center; }
+
+                                                                                  #progressbar li:after {
+                                                                                    content: '';
+                                                                                    width: 100%;
+                                                                                    height: 2px;
+                                                                                    background: white;
+                                                                                    position: absolute;
+                                                                                    left: -50%;
+                                                                                    top: 9px;
+                                                                                    z-index: -1; }
+
+                                                                                    #progressbar li:first-child:after {
+                                                                                      content: none; }
+
+                                                                                      #progressbar li.active:before, #progressbar li.active:after {
+                                                                                        background: #cf5c36;
+                                                                                        color: white; }
+
+                                                                                        .pointer-shape {
+                                                                                          width: 200px;
+                                                                                          height: 40px;
+                                                                                          position: relative;
+                                                                                          background: #050517;
+                                                                                          display: flex;
+                                                                                          justify-content: center;
+                                                                                          align-items: center;
+                                                                                          color: #fff; }
+
+                                                                                          .pointer-shape:after {
+                                                                                            content: "";
+                                                                                            position: absolute;
+                                                                                            left: 0;
+                                                                                            bottom: 0;
+                                                                                            width: 0;
+                                                                                            height: 0;
+                                                                                            border-left: 20px solid white;
+                                                                                            border-top: 20px solid transparent;
+                                                                                            border-bottom: 20px solid transparent; }
+
+                                                                                            .pointer-shape:before {
+                                                                                              content: "";
+                                                                                              position: absolute;
+                                                                                              right: -20px;
+                                                                                              bottom: 0;
+                                                                                              width: 0;
+                                                                                              height: 0;
+                                                                                              border-left: 20px solid #050517;
+                                                                                              border-top: 20px solid transparent;
+                                                                                              border-bottom: 20px solid transparent; }
+
+                                                                                              .view-input-container {
+                                                                                                margin-bottom: 15px; }
+
+                                                                                                #msform .view-input-container input, #msform .view-input-container textarea {
+                                                                                                  padding: 0;
+                                                                                                  padding-left: 15px;
+                                                                                                  margin-left: 30px;
+                                                                                                  border: 1px solid #cf5c36; }
+
+                                                                                                  #msform .view-input-container span {
+                                                                                                    font-size: 12px;
+                                                                                                    font-weight: 500; }
+
+                                                                                                    .owner-info {
+                                                                                                      padding: 30px; }
+
+                                                                                                      .bordered-container {
+                                                                                                        background: #fff;
+                                                                                                        border: 1px solid #050517;
+                                                                                                        position: relative; }
+
+                                                                                                        .bordered-ontainer.jumbotron {
+                                                                                                          padding: 1em 1em; }
+
+                                                                                                          .edit-input-container {
+                                                                                                            margin-bottom: 15px; }
+
+                                                                                                            .edit-input-container .pointer-shape {
+                                                                                                              margin-right: 30px; }
+
+                                                                                                              .edit-input-container input, textarea, select {
+                                                                                                                width: 70%;
+                                                                                                                resize: none; }
+
+                                                                                                                .edit-input-container input:focus, textarea:focus, select:focus {
+                                                                                                                  box-shadow: none;
+                                                                                                                  border: 1px solid #050517; }
+
+                                                                                                                  .edit-owner-section-title {
+                                                                                                                    background: white;
+                                                                                                                    position: absolute;
+                                                                                                                    top: -15px;
+                                                                                                                    display: flex;
+                                                                                                                    justify-content: center;
+                                                                                                                    align-items: center; }
+
+                                                                                                                    #edit-icon-btn {
+                                                                                                                      font-size: 20px;
+                                                                                                                      margin-bottom: 15px;
+                                                                                                                      cursor: pointer;
+                                                                                                                      width: 100%;
+                                                                                                                      text-align: right; }
+
+                                                                                                                      .edit-owner-buttons-container {
+                                                                                                                        display: flex;
+                                                                                                                        justify-content: center; }
+
+                                                                                                                        #edit_owner_form #edit_owner_cancel_btn {
+                                                                                                                          background: #cf5c36; }
+
+                                                                                                                          #edit_owner_form #edit_owner_cancel_btn:focus, #edit-owner-btn:focus {
+                                                                                                                            outline: none; }
+
+                                                                                                                            #edit_owner_form #edit_owner_cancel_btn:hover {
+                                                                                                                              box-shadow: 0 0 0 2px white, 0 0 0 3px #cf5c36; }
+
+                                                                                                                              .plots-table .btn-info, .contracts-table .btn-info, .payments-table .btn-info {
+                                                                                                                                background-color: #050517;
+                                                                                                                                border-color: #050517; }
+
+                                                                                                                                .plots-table .btn-info:hover, .contracts-table .btn-info:hover,
+                                                                                                                                .payments-table .btn-info:hover {
+                                                                                                                                  background-color: #cf5c36;
+                                                                                                                                  border-color: #cf5c36; }
+
+                                                                                                                                  .table-responsive {
+                                                                                                                                    max-height: 250px; }
+
+                                                                                                                                    @media (min-width: 576px) {
+                                                                                                                                      .jumbotron {
+                                                                                                                                        padding: 1em 1em;   }
+}

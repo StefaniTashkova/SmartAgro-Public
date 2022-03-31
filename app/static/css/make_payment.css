@@ -1,0 +1,119 @@
+#makePaymentModal > div.modal-dialog {
+  max-width: 1200px; }
+
+  #makePaymentModal > div > div > div.modal-header {
+    background: #050517;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+
+    #makePaymentModal > .modal-title {
+      text-align: center; }
+
+      #makePaymentModal > div > div > div.modal-header > button {
+        color: #fff;
+        opacity: 7;
+        padding: 0;
+        margin: 0;
+        align-self: flex-end; }
+
+        #makePaymentModal .modal-footer {
+          display: flex;
+          justify-content: center;
+          align-items: center; }
+
+          #makePaymentModal .modal-footer .action-button {
+            background: #cf5c36;
+            outline: none; }
+
+            .bordered-container {
+              background: #fff;
+              border: 1px solid #050517;
+              position: relative; }
+
+              .bordered-ontainer.jumbotron {
+                padding: 1em 1em; }
+
+                .payment-modal-section-title {
+                  background: white;
+                  position: absolute;
+                  top: -15px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center; }
+
+                  .view-details {
+                    background: lightgray;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                    color: #050517;
+                    border-top: 2px solid #050517; }
+
+                    .input-container {
+                      display: -ms-flexbox;
+                      display: flex;
+                      width: 100%;
+                      margin-bottom: 15px; }
+
+                      .input-container label {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center; }
+
+                        .table.contract-details thead, .table.contract-details tfoot {
+                          background-color: #050517;
+                          color: #fff; }
+
+                          .table-responsive {
+                            max-height: 250px; }
+
+                            #payment_form input, #payment_form textarea {
+                              padding: 15px;
+                              border: 1px solid #ccc;
+                              border-radius: 0px;
+                              width: 100%;
+                              box-sizing: border-box;
+                              font-family: montserrat;
+                              color: #2C3E50;
+                              font-size: 13px;
+                              resize: none; }
+
+                              #payment_form input#paid_amount_bgn {
+                                border-top: 2px solid #050517; }
+
+                                #payment_form input:focus, #payment_form textarea:focus, #payment_form select:focus {
+                                  -moz-box-shadow: none !important;
+                                  -webkit-box-shadow: none !important;
+                                  box-shadow: none !important;
+                                  border: 1px solid #050517;
+                                  outline-width: 0;
+                                  transition: All 0.5s ease-in;
+                                  -webkit-transition: All 0.5s ease-in;
+                                  -moz-transition: All 0.5s ease-in;
+                                  -o-transition: All 0.5s ease-in; }
+
+                                  #payment_form .action-button, #make_payment_cancel_btn {
+                                    width: 100px;
+                                    background: #050517;
+                                    font-weight: bold;
+                                    color: white;
+                                    border: 0 none;
+                                    border-radius: 25px;
+                                    cursor: pointer;
+                                    padding: 10px 5px;
+                                    margin: 10px 5px; }
+
+                                    #payment_form .action-button:hover, #payment_form .action-button:focus {
+                                      box-shadow: 0 0 0 2px white, 0 0 0 3px #050517; }
+
+                                      #makePaymentModal .modal-footer .action-button:hover,
+                                      #makePaymentModal .modal-footer .action-button:focus {
+                                        box-shadow: 0 0 0 2px white, 0 0 0 3px #cf5c36;
+                                        outline: none; }
+
+                                        #paid_amount_label {
+                                          color: #cf5c36;
+                                          font-weight: 600;
+                                          font-size: 17px; }

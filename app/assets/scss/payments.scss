@@ -1,0 +1,434 @@
+$black-color: #050517;
+$orange-color: #CF5C36;
+$darkorange-color: #cf5c36;
+$yellow-color: #d09f25;
+$dirtyyellow-color: #988148;
+$brown-color: #efc88b;
+$lightbrown-color: #f4e3b2;
+$white-color: #fff;
+$lightblue-color: #d3d5d7;
+$darkblue-color: #3C6266;
+$color1: #f4f4f4;
+$color2: #3197EE;
+
+.active {
+  background: none;
+}
+
+main {
+  background-image: url("/static/images/background.png");
+  padding: 20px;
+}
+
+.nav-item-payments {
+  background-color: $orange-color;
+}
+
+#payments {
+  padding: 10px;
+  width: 90%;
+  margin: auto;
+}
+
+.table-top {
+  width: 100%;
+  margin: 0;
+}
+
+.payments-top {
+  background: $black-color;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  color: white;
+  border-top: 2px solid $darkorange-color;
+
+  h5 {
+    flex-grow: 2;
+  }
+}
+
+.icon-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-actions i, .icon-actions span {
+  flex-grow: 1;
+  font-size: 20px;
+  cursor:pointer;
+}
+
+.search-container {
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.tableSearch {
+  height: 100%;
+  border-right: none;
+  border-top: none;
+}
+
+.tableSearch:focus {
+  border: none;
+  border-bottom: 2px solid $orange-color;
+  box-shadow: none;
+}
+
+.fa-file-contract {
+  cursor: pointer;
+  font-size: 20px;
+}
+#search_anchor{
+    height: 100%;
+    align-items: center;
+    display: flex;
+    background: $black-color;
+}
+
+.fa-search {
+  color: $white-color;
+  font-size: 20px;
+}
+
+.generate-btn-container {
+  display: flex;
+  padding: 0;
+  margin-top: 5px;
+}
+
+.generate-payments-btn,.download-generated-payments-btn {
+  background-color: $black-color;
+  border: 2px solid $darkorange-color;
+  padding: 10px;
+  width: 60%;
+  color: $white-color;
+}
+
+.generate-payments-btn:hover,.download-generated-payments-btn:hover {
+  background-color: $black-color;
+  color: $white-color;
+}
+
+.payments-table thead {
+  background: $darkorange-color;
+  color: $white-color;
+}
+
+.payments-table tbody tr:nth-child(even) {
+  background: $brown-color;
+}
+
+.payments-table tbody tr:nth-child(odd) {
+  background: $lightbrown-color;
+}
+
+ul.pagination a.page-link {
+  color: $black-color;
+}
+
+ul.pagination a.page-link:hover {
+  color: $brown-color;
+}
+
+ul.pagination a.page-link:focus {
+  box-shadow: none;
+}
+
+ul.pagination .page-item.active .page-link {
+  background-color: $black-color;
+  border-color: $black-color;
+}
+
+// Make Payment Modal CSS
+
+#makePaymentModal > div.modal-dialog {
+  max-width: 1268px;
+}
+
+#makePaymentModal > div > div > div.modal-header, #generatePaymentsModal > div > div > div.modal-header {
+  background: $black-color;
+  color: $white-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#makePaymentModal > .modal-title, #generatePaymentsModal > .modal-title {
+  text-align: center;
+}
+
+#makePaymentModal > div > div > div.modal-header > button, #generatePaymentsModal > div > div > div.modal-header > button {
+  color: $white-color;
+  opacity: 7;
+  padding: 0;
+  margin: 0;
+  align-self: flex-end;
+}
+
+#makePaymentModal .modal-footer, #generatePaymentsModal .modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bordered-container {
+  background: $white-color;
+  border: 1px solid $black-color;
+  position: relative;
+}
+
+.bordered-ontainer.jumbotron {
+  padding: 1em 1em;
+}
+
+.payment-modal-section-title {
+  background: white;
+  position: absolute;
+  top: -15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.view-details {
+  background: lightgray;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  color: $black-color;
+  border-top: 2px solid $black-color;
+}
+
+.table.contract-details thead, .table.contract-details tfoot {
+  background-color: $black-color;
+  color: $white-color;
+}
+
+.table-responsive {
+  max-height: 250px;
+}
+
+.input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.input-container label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*inputs*/
+
+#payment_form input, #payment_form textarea, #edit_payment_form textarea {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: montserrat;
+  color: #2C3E50;
+  font-size: 17px;
+  resize: none;
+}
+
+#payment_form input#paid_amount_bgn {
+  border-top: 2px solid #050517;
+}
+#payment_form div.payment-buttons-container{
+    display:flex !important;
+}
+
+#payment_form input:focus, #payment_form textarea:focus, #payment_form select:focus,#edit_payment_form textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid $black-color;
+  outline-width: 0;
+  transition: All 0.5s ease-in;
+  -webkit-transition: All 0.5s ease-in;
+  -moz-transition: All 0.5s ease-in;
+  -o-transition: All 0.5s ease-in;
+}
+
+/*buttons*/
+#payment_form .action-button, #make_payment_cancel_btn, #generate_payment_cancel_btn,#generate_payment_btn,div.payment-buttons-container button.action-button {
+  width: 100px;
+  background: $black-color;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+
+#makePaymentModal .modal-footer .action-button, #generatePaymentsModal .modal-footer #generate_payment_cancel_btn,#edit_payment_cancel_btn{
+  background: #cf5c36;
+  outline: none;
+}
+
+#payment_form .action-button:hover, #payment_form .action-button:focus,div.payment-buttons-container button.action-button:hover,div.payment-buttons-container button.action-button:focus,#generate_payment_btn:hover,#generate_payment_btn:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px $black-color;
+  outline: none;
+}
+
+#makePaymentModal .modal-footer .action-button:hover, #makePaymentModal .modal-footer .action-button:focus, #generatePaymentsModal .modal-footer #generate_payment_cancel_btn:hover, #generatePaymentsModal .modal-footer #generate_payment_cancel_btn:focus,#edit_payment_cancel_btn:hover,#edit_payment_cancel_btn:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px $darkorange-color;
+  outline: none;
+}
+#generatePaymentsModal .modal-footer div.loader-container{
+  display: none;
+}
+#generatePaymentsModal .modal-footer div.loader {
+  height: 40px;
+  width: 40px;
+  animation: spin 0.8s infinite linear;
+  border: 8px solid #F19F4D;
+  border-right-color: transparent;
+  border-radius: 50%;
+  opacity: 0.8;
+  margin: auto;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); }}
+
+.payment-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#paid_amount_label {
+  color: $darkorange-color;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+// Dual list 
+.transfer-double{
+  width: 100%;
+  height: 100%;
+}
+.transfer-double-content-left,.transfer-double-content-right{
+  width: 40%;
+}
+.transfer-double-content-middle{
+  margin: 0;
+  width: 20%;
+}
+.transfer-double-content{
+  padding: 0;
+}
+.transfer-double-content-middle{
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  justify-content: center;
+  align-items: center;
+}
+.transfer-double-selected-list-search-input,.transfer-double-list-search-input{
+  width: 100%;
+  padding: 15px;
+}
+.btn-arrow-active {
+  background: $black-color;
+}
+.checkbox-group .checkbox-normal:checked + label:before{
+  background: $black-color;
+  border-color: $black-color;
+}
+.btn-select-arrow{
+  cursor: pointer;
+}
+//Single payment page
+section#payment{
+  padding: 15px;
+}
+.payment-details-top{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.payment-details-top h3,.payment-section-titles{
+  color:gray;
+}
+.fas.fa-cog{
+  font-size: 20px;
+  color: $darkorange-color;
+  text-align: right;
+  cursor: pointer;
+}
+.payment-section{
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+}
+.transaction-div-preview{
+  border-left: 3px solid $darkorange-color;
+  margin-top: 15px;
+  padding: 5px;
+  box-shadow: inset -3px 2px 4px 0px #b0a6b0;
+}
+.transaction-div-preview span{
+  font-weight: 600;
+}
+#paid_amount{
+  align-self: flex-end;
+  color: $darkorange-color;
+  font-size: 17px;
+  font-weight: 700;
+}
+.sender-div-preview{
+  border-bottom: 4px solid lightslategray;
+}
+//File upload in payment single page
+div.file-container div.file-input {
+  margin-bottom: 15px;
+}
+
+#edit_contract_form input.file-caption-name {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  border: none;
+  background: 0 0;
+  outline: 0;
+}
+
+button.close.fileinput-remove:focus {
+  outline: none;
+}
+
+button.fileinput-upload-button {
+  display: none;
+}
+
+div.btn-primary.btn-file {
+  background-color: $black-color;
+  border-color: $black-color;
+}
+
+.btn-secondary.fileinput-remove.fileinput-remove-button {
+  background-color: $darkorange-color;
+  border-color: $darkorange-color;
+}
+div.payment-section textarea#notes{
+  width: 100%;
+  resize: none;
+  margin-top: 15px;
+}
+@media (min-width: 576px) {
+  .jumbotron {
+    padding: 1em 1em;
+  }
+}

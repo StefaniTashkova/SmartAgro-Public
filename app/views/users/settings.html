@@ -1,0 +1,342 @@
+{% extends "base.html" %}
+
+{% block css%}
+<link href="{{ url_for('static', filename='css/settings.css') }}" rel="stylesheet">
+{% endblock css%}
+
+{% block content %}
+<section id="settings" class="container">
+    {% with messages = get_flashed_messages(category_filter=["update_settings_msg"]) %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="row">
+        <div class="col-md-1 aside-settings p-0">
+            <ul class="nav nav-pills nav-stacked settings-menu">
+                <li class="active"><a href="" data-target-id="payment_settings"><i class="fas fa-dollar-sign"
+                                                                                   title="Рента"></i></a></li>
+                <li><a href="" data-target-id="contract_settings"><i class="fas fa-file-contract"
+                                                                     title="Договор"></i></a></li>
+                <li><a href="" data-target-id="user_settings"><i class="fas fa-user" title="Стопанство"></i></a></li>
+                <li><a href="" data-target-id="documents_settings"><i class="fas fa-folder" title="Бланки"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-11  settings-content" id="payment_settings">
+            <div class="panel panel-info" style="margin: 1em;">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">Настройки на Рента</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{{url_for('edit_rent_settings')}}" id="rent_settings_form" method="post">
+                        <div class="multiselect" id="grain_types_select" multiple="multiple" data-target="multi-0">
+                            <input type="hidden" id="selected_grain_types_input" name="selectedgraintypes"
+                                   value="{{rent_settings['selectedgraintypes']}}">
+                            <div class="title noselect">
+                                <span class="text" id="selected_grain_types_component">Списък от житни култури</span>
+                                <span class="close-icon">&times;</span>
+                                <span class="expand-icon">&plus;</span>
+                            </div>
+                            <div class="container grain-types-options-list">
+
+                            </div>
+                        </div>
+                        <div class="multiselect" id="mixed_grain_holders" multiple="multiple" data-target="multi-0">
+                            <input type="hidden" id="selected_grain_mixers_input" name="selectedgrainmixers"
+                                   value="{{rent_settings['selectedgrainmixers']}}">
+                            <div class="title noselect">
+                                <span class="text"
+                                      id="selected_grain_mixers_component">Списък на смесители на смески</span>
+                                <span class="close-icon">&times;</span>
+                                <span class="expand-icon">&plus;</span>
+                            </div>
+                            <div class="container mixed-grain-holders-options-list">
+
+                            </div>
+                        </div>
+                        <div id="rent_calc_settings" class="bordered-container jumbotron">
+                            <div class="rent-section-title"><h5>Задаване на настройки за калкулация</h5></div>
+                            <div class="input-container row">
+                                <label for="" class="col-md-3">Изчисляване на рента по:</label>
+                                <div class="col-md-9">
+                                    <input type="hidden" id="checked_radio_value" value="{{rent_settings['rentcalculation']}}">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rentcalculation"
+                                               id="rent_by_doc_option" value="ByDocumentArea">
+                                        <label class="form-check-label" for="rent_by_doc_option">Обща площ по
+                                            документ</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rentcalculation"
+                                               id="rent_by_workable_area_radio" value="ByWorkableArea">
+                                        <label class="form-check-label" for="rent_by_workable_area_radio">Обща
+                                            обработваема площ</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-container row">
+                                <label for="" class="col-md-3">Задаване на:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="kgperdka" placeholder="кг." value="{{rent_settings['kgperdka']}}"><span
+                                        class="mx-1">кг. на дка</span>
+                                    <input type="text" name="bgnperdka" placeholder="лв." value="{{rent_settings['bgnperdka']}}"><span
+                                        class="mx-1">лв. на дка</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="edit-user-buttons-container">
+                            <input type="submit" name="submit" class="submit action-button" id="edit_rent_btn"
+                                   value="Редактирай"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-11  settings-content" id="contract_settings">
+            <div class="panel panel-info" style="margin: 1em;">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">Настройки на Договор</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{{url_for('edit_contract_settings')}}" id="contract_settings_form" method="post">
+                        <div class="input-container">
+                            <i class="far fa-calendar-alt icon"></i>
+                            <input type="text" id="date_signed" name='datesigned' placeholder="Дата на сключване"
+                                   value="{{contract_settings['datesigned']}}">
+                        </div>
+                        <div class="input-container">
+                            <i class="far fa-calendar-alt icon"></i>
+                            <input type="text" id="date_started" name="datestarted" placeholder="Дата на валидност(считано от)"
+                                   value="{{contract_settings['datestarted']}}">
+                        </div>
+                        <div class="input-container row">
+                            <label for="" class="col-md-2">Задаване на:</label>
+                            <div class="col-md-8">
+                                <input type="text" name="kgperdkaincontract" placeholder="кг." value="{{contract_settings['kgperdkaincontract']}}">
+                            </div>
+                            <span class="col-md-2">на дка по договор</span>
+                        </div>
+                        <div class="edit-user-buttons-container">
+                            <input type="submit" name="submit" class="submit action-button" id="edit_contract_btn"
+                                   value="Редактирай"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-11  settings-content" id="user_settings">
+            <div class="panel panel-info" style="margin: 1em;">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">Настройки на Стопанство</h3>
+                </div>
+                {% with messages = get_flashed_messages(category_filter=["edit_user_msg"]) %}
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <div class="panel-body">
+                    <form action="{{url_for('edit_user')}}" id="user_settings_form" method="post">
+                        {{ user_form.hidden_tag() }}
+                        <div class="input-container row">
+                            <label for="" class="col-md-3">Име на организацията</label>
+                            <div class="col-md-9">
+                                {{ user_form.company_name }}
+                            </div>
+                            {% for error in user_form.company_name.errors %}
+                            <div class="error-group alert alert-danger alert-dismissible fade show mt-2 col-12"
+                                 role="alert">
+                                <strong>{{ error }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="input-container row">
+                            <label for="" class="col-md-3">ЕИК по булстат</label>
+                            <div class="col-md-9">
+                                {{ user_form.company_number }}
+                            </div>
+                            {% for error in user_form.company_number.errors %}
+                            <div class="error-group alert alert-danger alert-dismissible fade show mt-2 col-12"
+                                 role="alert">
+                                <strong>{{ error }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        <div class="input-container row">
+                            <label for="" class="col-md-3">Три имена на физическо лице</label>
+                            <div class="col-md-9">
+                                {{ user_form.responsibleperson_name }}
+                            </div>
+                            {% for error in user_form.responsibleperson_name.errors %}
+                            <div class="error-group alert alert-danger alert-dismissible fade show mt-2 col-12"
+                                 role="alert">
+                                <strong>{{ error }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="input-container row">
+                            <label for="" class="col-md-3">EГН на задължено лице</label>
+                            <div class="col-md-9">
+                                {{ user_form.responsibleperson_egn }}
+                            </div>
+                            {% for error in user_form.responsibleperson_egn.errors %}
+                            <div class="error-group alert alert-danger alert-dismissible fade show mt-2 col-12"
+                                 role="alert">
+                                <strong>{{ error }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="input-container row">
+                            <label for="" class="col-md-3">ЛЧН на задължено лице</label>
+                            <div class="col-md-9">
+                                {{ user_form.responsibleperson_id_number}}
+                            </div>
+                            {% for error in user_form.responsibleperson_id_number.errors %}
+                            <div class="error-group alert alert-danger alert-dismissible fade show mt-2 col-12"
+                                 role="alert">
+                                <strong>{{ error }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="input-container row">
+                            <label for="" class="col-md-3">IBAN на наредител</label>
+                            <div class="col-md-9">
+                                {{ user_form.IBAN}}
+                            </div>
+                            {% for error in user_form.IBAN.errors %}
+                            <div class="error-group alert alert-danger alert-dismissible fade show mt-2 col-12"
+                                 role="alert">
+                                <strong>{{ error }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="input-container row">
+                            <label for="" class="col-md-3">BIC на банката на наредител</label>
+                            <div class="col-md-9">
+                                {{ user_form.BIC}}
+                            </div>
+                            {% for error in user_form.BIC.errors %}
+                            <div class="error-group alert alert-danger alert-dismissible fade show mt-2 col-12"
+                                 role="alert">
+                                <strong>{{ error }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="edit-user-buttons-container">
+                            <input type="submit" name="submit" class="submit action-button" id="edit-user-btn"
+                                   value="Редактирай"/>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-11  settings-content" id="documents_settings">
+            <div class="panel panel-info" style="margin: 1em;">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">Настройка на Бланки</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{{url_for('edit_template_settings')}}" id="cash_payment_doc_settings_form"
+                              method="post">
+                        <div id="cash_payment_doc_settings" class="bordered-container jumbotron">
+                            <div class="rent-section-title"><h5>Разходен касов ордер</h5></div>
+
+                                <div class="input-container row">
+                                    <label for="" class="col-md-3">Дата</label>
+                                    <div class="col-md-9">
+                                        <input type="text" id="cash_payment_doc_date" name="cashpaymentdocdate"
+                                               value="{{template_settings['cashpaymentdocdate']}}">
+                                    </div>
+                                </div>
+                                <div class="input-container row">
+                                    <label for="" class="col-md-3">За рента(стопнаска година)</label>
+                                    <div class="col-md-9">
+                                        <input type="text" id="agricultural_year" name="agriculturalyear"
+                                               value="{{template_settings['agriculturalyear']}}">
+                                    </div>
+                                </div>
+                                <div class="input-container row">
+                                    <label for="" class="col-md-3">Основание за плащане</label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="reasonforpayment" value="{{template_settings['reasonforpayment']}}">
+                                    </div>
+                                </div>
+                        </div>
+                        <div id="bank_payment_doc_settings" class="bordered-container jumbotron">
+                            <div class="rent-section-title"><h5>Платежно нареждане по банков път</h5></div>
+
+                                <div class="input-container row">
+                                    <label for="" class="col-md-3">Дата</label>
+                                    <div class="col-md-9">
+                                        <input type="text" id="bank_payment_doc_date" name="bankpaymentdocdate"
+                                               value="{{template_settings['bankpaymentdocdate']}}">
+                                    </div>
+                                </div>
+                                <div class="input-container row">
+                                    <label for="" class="col-md-3">Основание за банков превод </label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="reasonforbankpayment" value="{{template_settings['reasonforbankpayment']}}">
+                                    </div>
+                                </div>
+
+                        </div>
+                        <div class="edit-user-buttons-container">
+                                    <input type="submit" name="submit" class="submit action-button"
+                                           id="edit_payment_doc_btn" value="Редактирай"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block javascript %}
+
+<script src="{{ url_for('static',filename='js/settings.js')}}"></script>
+
+{% endblock javascript  %}

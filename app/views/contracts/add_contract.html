@@ -1,0 +1,279 @@
+<div class="modal fade" id="addContractModal" tabindex="-1" role="dialog" aria-labelledby="addContractModal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div><i class="fas fa-plus-circle"></i></div>
+                <h4 class="modal-title" id="addContractModal">Добавяне на договор</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <!-- MultiStep Form -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="add_contract_form" action="{{url_for('add_contract', owner_id = owner_id)}}"
+                                  method="post" enctype="multipart/form-data">
+                                {{ form.hidden_tag() }}
+                                <!-- progressbar -->
+                                <ul id="progressbar" class="row">
+                                    <li class="active col-md-3">Избор на собственик</li>
+                                    <li class="col-md-3">Детайли по договор</li>
+                                    <li class="col-md-3">Парцели</li>
+                                    <li class="col-md-3">Преглед</li>
+                                </ul>
+                                <!-- fieldsets -->
+                                <fieldset>
+                                    <h2 class="fs-title">Избор на собственик</h2>
+                                    <div class="row table-top mb-3">
+                                        <div class="search-container col-12">
+                                            <input class="form-control tableSearch" id="select_owner_search" type="text"
+                                                   placeholder="Търси"><span><i
+                                                class="fas fa-search"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table select-owners-table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Име</th>
+                                                <th scope="col">ЕГН/БУЛСТАТ</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for owner in owners %}
+                                            <tr owner_id={{owner.id}}>
+                                                <td>{{ owner.name }}</td>
+                                                <td>{{ owner.egn }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <input type="button" name="next" class="next action-button first-next-btn"
+                                           value="Следващ"/>
+                                </fieldset>
+                                <fieldset>
+                                    <h2 class="fs-title">Детайли по договор</h2>
+                                    <div class="input-container">
+                                        <label for="custom-radio">Вид договор</label>
+                                        {% for subfield in form.contract_type %}
+                                        <div class="custom-control custom-radio mx-3">
+                                            {{ subfield(class='custom-control-input') }} {{
+                                            subfield.label(class='custom-control-label') }}
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="input-container">
+                                        <i class="far fa-calendar-alt icon"></i>
+                                        {{ form.date_signed(placeholder="Дата на подписване",required=False)}}
+                                    </div>
+                                    {% for error in form.date_signed.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        <i class="far fa-calendar-alt icon"></i>
+                                        {{ form.date_started(placeholder="Считано от",required=False)}}
+                                    </div>
+                                    {% for error in form.date_started.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        {{ form.duration_years(placeholder="Период(години)",required=False) }}
+                                    </div>
+                                    {% for error in form.duration_years.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        {{ form.locality_id(placeholder="dd/mm/yy")}}
+                                    </div>
+                                    {% for error in form.locality_id.errors %}
+                                    <div class="error-group alert alert-danger alert-dismissible fade show mt-2"
+                                         role="alert">
+                                        <strong>{{ error }}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="input-container">
+                                        {{ form.notes(placeholder='Бележки') }}
+                                    </div>
+
+                                    <input type="button" name="previous"
+                                           class="previous action-button-previous first-prev-btn"
+                                           value="Предишен"/>
+                                    <input type="button" name="next" class="next action-button second-next-btn"
+                                           value="Следващ"/>
+                                </fieldset>
+                                <fieldset>
+                                    <h2 class="fs-title">Парцели</h2>
+                                    <div class="accordion" id="accordionExample">
+                                        {% for locality in localities %}
+                                        <div class="card">
+                                            <div class="card-header" id='heading{{loop.index}}' data-toggle="collapse"
+                                                 data-target="#collapse{{locality.id}}" aria-expanded="true"
+                                                 aria-controls="collapse{{locality.id}} ">
+                                                <h5 class="mb-0">
+                                                    {{locality.name}}
+                                                </h5>
+                                            </div>
+                                            <div id="collapse{{locality.id}}" class="collapse"
+                                                 data-parent="#accordionExample"
+                                                 aria-labelledby="heading{{loop.index}}">
+                                                <div class="card-body">
+                                                    <table class="table table-responsive-sm  plots-table accordion-plots-table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">
+                                                                <label class='checkbox-label'>
+                                                                    <input type="checkbox" class="selectall">
+                                                                    <span class="checkbox-custom"
+                                                                          title="Избери всички"></span>
+                                                                </label>
+                                                            </th>
+                                                            <th scope="col">Идентификатор</th>
+                                                            <th scope="col">Локация</th>
+                                                            <th scope="col">Категория</th>
+                                                            <th scope="col">Площ по док.(дка)</th>
+                                                            <th scope="col">Притежавана площ</th>
+
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for ownership in ownerships if ownership.plot.locality_id ==
+                                                        locality.id %}
+                                                        <tr class="hidden"
+                                                            owner_id="{{ownership.owner_id}}"
+                                                            first_available_year="{{ownership.first_available_year}}">
+                                                            <td>
+                                                                <label class='checkbox-label'>
+                                                                    <input type="checkbox"
+                                                                           name="plots"
+                                                                           class="single_plot_checkbox"
+                                                                           value="{{ownership.plot_id}}">
+                                                                    <span class="checkbox-custom"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>{{ownership.plot.id}}</td>
+                                                            <td>{{ownership.plot.sublocality.name}}</td>
+                                                            <td>{{ownership.plot.category}}</td>
+                                                            <td>{{ownership.plot.area_by_doc}}</td>
+                                                            <td>{{ownership.total_owned_area}}</td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+
+                                    </div>
+
+
+                                    <input type="button" name="previous" class="previous action-button-previous"
+                                           value="Предишен"/>
+                                    <input type="button" name="next" class="next action-button" id="third-next-btn"
+                                           value="Следващ"/>
+                                </fieldset>
+                                <fieldset>
+                                    <h2 class="fs-title">Преглед</h2>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading mb-2">Детайли по договор</div>
+                                        <div class="panel-body">
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Собственик</span></div>
+                                                <input type="text" class="col-8" name='owner_preview' value="">
+                                            </div>
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Вид договор</span></div>
+                                                <input type="text" class="col-8" name="contract_type_preview" value="">
+                                            </div>
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Дата на подписване</span></div>
+                                                <input type="text" class="col-8" name="date_signed_preview" value="">
+                                            </div>
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Дата на сключване</span></div>
+                                                <input type="text" class="col-8" name="date_started_preview" value="">
+
+                                            </div>
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Период(години)</span></div>
+                                                <input type="text" class="col-8" name="duration_years_preview" value="">
+                                            </div>
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Място на сключване</span></div>
+                                                <input type="text" class="col-8" name="locality_id_preview" value="">
+                                            </div>
+
+                                            <div class="view-input-container row" style="display: flex;">
+                                                <div class="view-plot-label col-4"><span>Бележки</span></div>
+                                                <textarea name="notes_preview" class="col-8" cols="30"
+                                                          rows="10"></textarea>
+                                            </div>
+                                            <div class="panel-heading mb-2">Парцели към договор</div>
+                                            <div class="table-responsive">
+                                            <table class="table plots-table-preview">
+                                                <thead>
+                                                <th>Идентификатор</th>
+                                                <th>Местност</th>
+                                                <th>Площ по док.(дка)</th>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <input type="button" name="previous"
+                                           class="previous action-button-previous col-md-3"
+                                           value="Предишен"/>
+
+                                    {{ form.add_contract_btn(class="submit action-button col-md-3" ) }}
+
+                                </fieldset>
+
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.MultiStep Form -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="loader-container col-12 text-center">
+                    <div class="loader"></div>
+                    <h5>Моля изчакайте</h5>
+                </div>
+                <button type="button" class="action-button" id="add_contract_cancel_btn" data-dismiss="modal">Откажи
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

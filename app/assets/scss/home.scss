@@ -1,0 +1,419 @@
+// @import "color-schemer";
+// @import "compass";
+// @import "compass/css3/animation";
+$defaultSeconds: 3s;
+
+$black-color: #050517;
+$orange-color: #CF5C36;
+$darkorange-color: #cf5c36;
+$yellow-color: #d09f25;
+$dirtyyellow-color: #988148;
+$brown-color: #efc88b;
+$lightbrown-color: #f4e3b2;
+$white-color: #fff;
+$lightblue-color: #d3d5d7;
+$darkblue-color: #3C6266;
+main {
+  margin-top: 0;
+}
+
+.flex-circle {
+  $size: 150px;
+  width: $size;
+  height: $size;
+  border-radius: $size / 2;
+  background-color: $white-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.flex-circle span {
+  font-size: 50px;
+  color: $darkorange-color;
+}
+
+section {
+  // height: 550px;
+  min-height: 500px;
+}
+
+.banner {
+  background-image: linear-gradient(rgba(27, 22, 22, 0.5), rgba(27, 22, 22, 0.5)), url("/static/images/sunset-field-of-grain-5980.jpg");
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  align-items: center;
+  display: flex;
+  align-content: center;
+}
+
+.banner-text {
+  text-align: center;
+}
+
+.banner-heading {
+  font-size: 75px;
+  font-weight: 700;
+  line-height: 100px;
+  margin-bottom: 30px;
+  color: $white-color;
+}
+
+.banner-sub-heading {
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 30px;
+  margin-bottom: 50px;
+  color: $white-color;
+}
+
+.btn-banner {
+  padding: 5px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  color: $white-color;
+  text-transform: uppercase;
+}
+
+.text-intro {
+  width: 90%;
+  margin: auto;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.login-form {
+  width: 385px;
+  margin: 30px auto;
+}
+
+.login-form form {
+  margin-bottom: 15px;
+  background-color: $black-color;
+  opacity: 0.5;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  width: 100%;
+  margin: auto;
+}
+
+.login-form h2 {
+  margin: 0 0 15px;
+  color: $dirtyyellow-color;
+  font-weight: 700;
+}
+
+.form-control,
+.login-btn {
+  min-height: 38px;
+  border-radius: 2px;
+}
+
+.input-group-addon {
+  background: lightgray;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  align-items: center;
+  color: $yellow-color;
+}
+
+.input-group-addon .fa {
+  font-size: 18px;
+}
+
+.login-btn {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.login-btn:hover {
+  background-color: $yellow-color;
+  border-color: $yellow-color;
+}
+
+.clearfix {
+  display: flex;
+}
+
+.clearfix > label.pull-left {
+  color: $white-color;
+  flex-grow: 2;
+}
+
+.clearfix > label.pull-right {
+  font-weight: 700;
+}
+
+div.clearfix > label.pull-right > a {
+  color: $orange-color;
+}
+
+.hidden-login-form {
+  display: none;
+}
+
+//Section about
+#about {
+  background-color: $lightbrown-color;
+}
+
+aside.right-content, aside.left-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-text {
+  width: 80%;
+  text-align: center;
+}
+
+.about-text h2 {
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  font-weight: 400;
+}
+
+.about-image-container {
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12);
+  width: 80%;
+  border-radius: 5px;
+}
+
+.about-image-container img {
+  width: 100%;
+  height: 100%;
+}
+
+//Section Features - Features slider
+
+.flex-container {
+  height: 100%;
+  width: 100%;
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  overflow: hidden;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.flex-title {
+  color: #f1f1f1;
+  position: relative;
+  font-size: 40px;
+  margin: auto;
+  text-align: center;
+  transform: rotate(90deg);
+  top: 15%;
+  -webkit-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  transition: all 500ms ease;
+  @media screen and (max-width: 768px) {
+    transform: rotate(0deg) !important;
+  }
+}
+
+.flex-about {
+  opacity: 0;
+  color: #f1f1f1;
+  position: relative;
+  width: 90%;
+  font-size: 2vw;
+  padding: 5%;
+  top: 10%;
+  border-radius: 10px;
+  line-height: 1.3;
+  margin: auto;
+  text-align: left;
+  transform: rotate(0deg);
+  -webkit-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  transition: all 500ms ease;
+  @media screen and (max-width: 768px) {
+    padding: 0%;
+    border: 0px solid #f1f1f1;
+  }
+}
+
+
+.flex-slide {
+  -webkit-flex: 1; /* Safari 6.1+ */
+  -ms-flex: 1; /* IE 10 */
+  flex: 1;
+  cursor: pointer;
+  height: 500px;
+  -webkit-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  transition: all 500ms ease;
+  @media screen and (max-width: 768px) {
+    overflow: auto;
+    overflow-x: hidden;
+  }
+}
+
+.flex-slide p {
+  border: 2px solid #f1f1f1;
+  margin-top: 2em;
+  padding: 10px;
+  @media screen and (max-width: 768px) {
+    font-size: 2em;
+  }
+}
+
+.flex-slide ul li {
+  @media screen and (max-width: 768px) {
+    font-size: 2em;
+  }
+}
+
+.flex-slide:hover {
+  -webkit-flex-grow: 3;
+  flex-grow: 3;
+}
+
+.mis {
+  background-color: $black-color;
+  @media screen and (min-width: 768px) {
+    @include animation-properties((animation: aboutFlexSlide, animation-duration: $defaultSeconds, animation-iteration-count: 1, animation-delay: 0s));
+  }
+}
+
+@keyframes aboutFlexSlide {
+  0% {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+  }
+  50% {
+    -webkit-flex-grow: 3;
+    flex-grow: 3;
+  }
+  100% {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+  }
+}
+
+.flex-title-mis {
+  @media screen and (min-width: 768px) {
+    transform: rotate(90deg);
+    top: 15%;
+    @include animation-properties((animation: homeFlextitle, animation-duration: $defaultSeconds, animation-iteration-count: 1, animation-delay: 0s));
+  }
+}
+
+
+@keyframes homeFlextitle {
+  0% {
+    transform: rotate(90deg);
+    top: 15%;
+  }
+  50% {
+    transform: rotate(0deg);
+    top: 15%;
+  }
+  100% {
+    transform: rotate(90deg);
+    top: 15%;
+  }
+}
+
+.flex-about-mis {
+  opacity: 0;
+  @media screen and (min-width: 768px) {
+    @include animation-properties((animation: flexAboutHome, animation-duration: $defaultSeconds, animation-iteration-count: 1, animation-delay: 0s));
+  }
+}
+
+@keyframes flexAboutHome {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.field {
+  background-color: $darkorange-color;
+}
+
+.finance {
+  background-color: $lightbrown-color;
+}
+
+.engineering {
+  background-color: $brown-color;
+}
+
+//Contact us section
+#contact {
+  background-color: $white-color;
+  padding: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+#contact > div > div.container {
+  padding: 20px;
+}
+
+.contact-form-container {
+  background: #f2f2f2;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12);
+}
+
+.jumbotron {
+  background: $black-color;
+  color: #FFF;
+  border-radius: 0px;
+}
+
+.jumbotron-sm {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.jumbotron small {
+  color: #FFF;
+}
+
+.h1 small {
+  font-size: 24px;
+}
+
+.fa-phone, .fa-globe-europe {
+  color: $yellow-color;
+}
+
+

@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block css%}
+<link href="{{ url_for('static', filename='css/payments.css') }}" rel="stylesheet">
+{% endblock css%}
+
+{% block content %}
+<section id="payment">
+    <div id="payment_container" class=" bordered-container container-fluid col-md-6 p-4">
+        <div class="payment-details-top row mx-0">
+            {% with messages = get_flashed_messages(category_filter=["edit_payment_msg"]) %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show mt-2 col-12" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <h3 class="col-10 p-0">Детайли на плащане</h3>
+            <i class="fas fa-cog col-2 p-0" title="Редактирай плащане" id="edit_payment_icon_btn"></i>
+        </div>
+        <div class="payment-section">
+            <h5 class="payment-section-titles">Транзакция</h5>
+            <div class="transaction-div-preview">
+                <span>Номер: {{ payment.id }} </span>
+            </div>
+            <div class="transaction-div-preview">
+                <span>Дата: {{ payment.date.strftime('%d.%m.%Y')}}</span>
+            </div>
+            <div class="transaction-div-preview">
+                <span>Вид: {{ payment.type }}</span>
+            </div>
+            <div class="transaction-div-preview">
+                <span>Статус: {{ payment.status }}</span>
+            </div>
+            <span id="paid_amount">BGN: {{ payment.paid_amount_bgn }}</span>
+        </div>
+        <div class="payment-section pb-4">
+            <h5 class="payment-section-titles">Получател</h5>
+            <div class="row mr-0">
+                <span class="col-2 div-preview-span ">Име</span>
+                <div class="sender-div-preview col-10">
+                    <span> {{ payment.contract.contract_owners[0].owner.name }} </span>
+                </div>
+            </div>
+            <div class="row mr-0">
+                <span class="col-2 div-preview-span ">ЕГН</span>
+                <div class="sender-div-preview col-10">
+                    <span> {{ payment.contract.contract_owners[0].owner.egn }} </span>
+                </div>
+            </div>
+            <div class="row mr-0">
+                <span class="col-2 div-preview-span ">IBAN</span>
+                <div class="sender-div-preview col-10">
+                    <span> {{ payment.contract.contract_owners[0].owner.IBAN }} </span>
+                </div>
+            </div>
+            <div class="row mr-0">
+                <span class="col-2 div-preview-span ">Пълномощно</span>
+                <div class="sender-div-preview col-10">
+                    <span> </span>
+                </div>
+            </div>
+        </div>
+        <div class="payment-section pb-4">
+            <h5 class="payment-section-titles">Наредител</h5>
+            <div class="row mr-0">
+                <span class="col-2 div-preview-span ">Изплатено </span>
+                <div class="sender-div-preview col-10">
+                    <span> {{ current_user.responsibleperson_name }} </span>
+                </div>
+            </div>
+            <div class="row mr-0">
+                <span class="col-2 div-preview-span ">Стопанство</span>
+                <div class="sender-div-preview col-10">
+                    <span> {{ current_user.company_name }} </span>
+                </div>
+            </div>
+            <div class="row mr-0">
+                <span class="col-2 div-preview-span">ЕИК</span>
+                <div class="sender-div-preview col-10">
+                    <span> {{ current_user.company_number }} </span>
+                </div>
+            </div>
+            <div class="row mr-0">
+                <span class="col-2 div-preview-span ">IBAN</span>
+                <div class="sender-div-preview col-10">
+                    <span> {{ current_user.IBAN }} </span>
+                </div>
+            </div>
+        </div>
+        <div class="payment-section">
+            <h5 class="payment-section-titles">Договор</h5>
+            <div class="transaction-div-preview">
+                <span>Номер: {{ payment.contract.id }}</span>
+            </div>
+            <div class="transaction-div-preview mb-4">
+                <span>Стопанска година: {{ payment.agricultural_year }} </span>
+            </div>
+
+        </div>
+        <form action="{{url_for('edit_payment', payment_id = payment.id)}}" method="post" id="edit_payment_form"
+              enctype="multipart/form-data">
+            {{ payment_form.hidden_tag() }}
+            <div class="payment-section">
+                <h5 class="payment-section-titles">Разходен касов ордер/Платежно нареждане</h5>
+                <div>
+                    {{ payment_form.doc_path }}
+                </div>
+                <div class="col-12 p-0">
+                    {{ payment_form.notes(placeholder='Бележки') }}
+                </div>
+
+            </div>
+            {% if stored_doc_path is defined %}
+            <input type="hidden" value='{{stored_doc_path}}' id="stored_doc_path">
+            {% endif %}
+            <div class="payment-buttons-container">
+                <button type="button" class="action-button" id="edit_payment_cancel_btn">Откажи</button>
+                <button type='submit' class="action-button">Потвърди</button>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+    owners_json = JSON.parse({{ owners_json | tojson }})
+
+</script>
+<script src="{{ url_for('static',filename='js/payments.js')}}"></script>
+
+{% endblock javascript  %}

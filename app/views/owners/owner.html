@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block css%}
+<link href="{{ url_for('static', filename='css/owners.css') }}" rel="stylesheet">
+{% endblock css%}
+
+{% block content %}
+
+<section class="owner-info container-fluid">
+    <div class="owners-top p-2 mb-4 row mx-0">
+        <span>Информация за собственик: {{owner.name}} </span>
+    </div>
+    <div class="owner-info-container row mx-0">
+        <section id="owner_personal_info" class="bordered-container jumbotron col-md-6">
+            <div class="edit-owner-section-title"><h5>Лични данни</h5></div>
+            <span type="button" id="edit-icon-btn"><i class="fas fa-user-edit"
+                                                      title="Редактиране на собственик"></i></span>
+            {% include '/owners/edit_owner.html' %}
+        </section>
+        <aside id="owner_more_info" class="col-md-6 pr-0">
+            <div id="owner_plots" class="bordered-container jumbotron">
+                <div class="edit-owner-section-title"><h5>Парцели</h5></div>
+                <div class="table-responsive">
+                    <table class="table plots-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Идентификатор</th>
+                            <th scope="col">Локация</th>
+                            <th scope="col">Площ по док.(дка)</th>
+                            <th scope="col">Договор №</th>
+                            <th scope="col">Опции</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for ownership in owner_ownerships %}
+                        <tr>
+                            <td>{{ ownership.plot.id }}</td>
+                            <td>{{ ownership.plot.sublocality.name }}</td>
+                            <td>{{ ownership.plot.area_by_doc }}</td>
+                            {% if ownership.contract_subjects|length > 0 %}
+                            <td>{{ ownership.contract_subjects[0].contract_id }}</td>
+                            {% else %}
+                            <td>Без договор</td>
+                            {% endif %}
+                            <td class="icon-actions">
+                                <button class="btn btn-info" data-href="{{url_for('plot',ownership_id=ownership.id)}}">
+                                    Още...
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+            <div id="owner_contracts" class="bordered-container jumbotron">
+                <div class="edit-owner-section-title"><h5>Договори</h5></div>
+                  <div class="table-responsive">
+                    <table class="table contracts-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Тип</th>
+                            <th scope="col">Договор №</th>
+                            <th scope="col">Дата на сключване</th>
+                            <th scope="col">Валидност</th>
+                            <th scope="col">Опции</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for record in owner.contract_owners %}
+                        <tr>
+                            <td>{{ record.contract.contract_type_ref.name}}</td>
+                            <td>{{ record.contract.id }}</td>
+                            <td>{{ record.contract.date_signed.strftime('%d/%m/%Y') }}</td>
+                            <td>{{ record.contract.duration_years }} год.</td>
+                            <td class="icon-actions">
+                                <button class="btn btn-info" data-href="{{url_for('contract',contract_id=record.contract.id)}}">
+                                    Още...
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div id="owner_payments" class="bordered-container jumbotron">
+                <div class="edit-owner-section-title"><h5>Плащания</h5></div>
+                <div class="table-responsive">
+                    <table class="table payments-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Статус</th>
+                            <th scope="col">Дата</th>
+                            <th scope="col">Стойност(лв)</th>
+                            <th scope="col">По дог. №</th>
+                            <th scope="col">Опции</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for record in owner.contract_owners %}
+                            {% for payment in record.contract.payments %}
+                            <tr>
+                                <td>{{ payment.status }}</td>
+                                <td>{{ payment.date.strftime('%d/%m/%Y') }}</td>
+                                <td>{{ payment.paid_amount_bgn }}</td>
+                                <td>{{ payment.contract_id }}</td>
+                                <td class="icon-actions">
+                                    <button class="btn btn-info" data-href="{{url_for('payment',payment_id=payment.id)}}">
+                                        Още...
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+        </aside>
+    </div>
+
+</section>
+
+
+{% endblock %}
+
+{% block javascript %}
+
+<script src="{{ url_for('static',filename='js/owners.js')}}"></script>
+
+{% endblock javascript  %}
